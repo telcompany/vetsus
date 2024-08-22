@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Vetsus.Application.Interfaces.Persistence;
 using Vetsus.MVC.Models;
 
 namespace Vetsus.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOrWOrk;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IUnitOfWork unitOrWOrk)
         {
-            _logger = logger;
+            _unitOrWOrk = unitOrWOrk;
         }
 
         public IActionResult Index()
@@ -21,6 +22,13 @@ namespace Vetsus.MVC.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Test()
+        {
+            var customers = await _unitOrWOrk.Customers.GetAsync(new Domain.Utilities.QueryParameters());
+
+            return View(customers);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

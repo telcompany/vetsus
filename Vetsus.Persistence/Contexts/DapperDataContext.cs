@@ -14,7 +14,7 @@ namespace Vetsus.Persistence.Contexts
         public DapperDataContext(IConfiguration configuration)
         {
             _configuration = configuration;
-            _connectionString = _configuration.GetConnectionString("SqlConnection");
+            _connectionString = _configuration.GetConnectionString("Default");
         }
 
         public IDbConnection? Connection {

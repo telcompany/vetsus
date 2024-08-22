@@ -1,7 +1,12 @@
+using Vetsus.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add services of all the layers
+builder.Services.AddPersistenceInfrastructure();
 
 var app = builder.Build();
 

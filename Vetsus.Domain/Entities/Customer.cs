@@ -6,6 +6,7 @@ namespace Vetsus.Domain.Entities
     [TableName("Customers")]
     public class Customer: IDbEntity
     {
+        [PrimaryKey]
         [ColumnName("Id")]
         public string Id { get; set; }
 

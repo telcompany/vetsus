@@ -28,10 +28,9 @@ namespace Vetsus.Persistence.Repositories
             if (!selectData.IsNullOrEmpty())
                 parameters.Add("columns", typeof(T).GetDbTableColumnNames(selectData), DbType.String, ParameterDirection.Input);
 
-            using (var connection = _dapperDataContext.Connection)
-            {
-                return await connection.QueryAsync<T>("spGetRecords", parameters, commandType: CommandType.StoredProcedure);
-            }
+            using var connection = _dapperDataContext.Connection;
+
+            return await connection.QueryAsync<T>("spGetRecords", parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<T> GetByIdAsync(string guid, params string[] selectData)
