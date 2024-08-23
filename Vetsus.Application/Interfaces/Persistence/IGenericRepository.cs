@@ -8,6 +8,7 @@ namespace Vetsus.Application.Interfaces.Persistence
     {
         Task<IEnumerable<T>> GetAsync(QueryParameters queryParameters, params string[] selectedData);
         Task<T> GetByIdAsync(string guid, params string[] selectedData);
+        Task<IEnumerable<T>> GetBySpecificColumnAsync(string columnName, string columnValue, params string[] selectData);
         Task<string> AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task SoftDeleteAsync(string id, bool softDeleteFromRelatedChildTables = false);

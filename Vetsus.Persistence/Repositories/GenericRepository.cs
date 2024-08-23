@@ -48,6 +48,22 @@ namespace Vetsus.Persistence.Repositories
             }
         }
 
+        public async Task<IEnumerable<T>> GetBySpecificColumnAsync(string columnName, string columnValue, params string[] selectData)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("tableName", typeof(T).GetDbTableName(), DbType.String, ParameterDirection.Input, size: 50);
+            parameters.Add("columnName", columnName, DbType.String, ParameterDirection.Input, size: 60);
+            parameters.Add("columnValue", columnValue, DbType.String, ParameterDirection.Input, size: 100);
+
+            if (!selectData.IsNullOrEmpty())
+                parameters.Add("columns", typeof(T).GetDbTableColumnNames(selectData), DbType.String, ParameterDirection.Input);
+
+            using (var connection = _dapperDataContext.Connection)
+            {
+                return await connection.QueryAsync<T>("spGetRecordsBySpecificColumn", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public async Task<int> GetTotalCountAsync()
         {
             var parameters = new DynamicParameters();

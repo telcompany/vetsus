@@ -8,21 +8,21 @@ namespace Vetsus.Domain.Entities
     {
         [PrimaryKey]
         [ColumnName("Id")]
-        public string Id { get; set; }
+        public string Id { get; set; } = ShortGuid.NewGuid();
 
         [ColumnName("FirstName")]
-        public string FirstName { get; set; }
-        
+        public string FirstName { get; set; } = string.Empty;
+
         [ColumnName("LastName")]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         [ColumnName("Address")]
-        public string Address { get; set; }
+        public string Address { get; set; } = string.Empty;
 
         [ColumnName("Phone")]
-        public string Phone { get; set; }
+        public string Phone { get; set; } = string.Empty;
 
         [ColumnName("Email")]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
     }
 }
