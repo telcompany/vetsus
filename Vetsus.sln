@@ -7,19 +7,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ACE80214-6AF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{0E695896-68F6-4D36-A6CF-5DBF47799A92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vetsus.MVC", "Vetsus.MVC\Vetsus.MVC.csproj", "{4BC9E291-1902-4587-BB0B-2C41FCD72814}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vetsus.MVC", "Vetsus.MVC\Vetsus.MVC.csproj", "{4BC9E291-1902-4587-BB0B-2C41FCD72814}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{644DF667-5D7D-4181-9249-CC3D31D48CAC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{DAA2732C-B343-43AD-9AD3-91014B472D1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vetsus.Application", "Vetsus.Application\Vetsus.Application.csproj", "{A27785CF-2A68-4F59-996D-94E9B2F22950}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vetsus.Application", "Vetsus.Application\Vetsus.Application.csproj", "{A27785CF-2A68-4F59-996D-94E9B2F22950}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vetsus.Domain", "Vetsus.Domain\Vetsus.Domain.csproj", "{2D4B94CD-3445-4762-A742-8C14A31FD642}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vetsus.Domain", "Vetsus.Domain\Vetsus.Domain.csproj", "{2D4B94CD-3445-4762-A742-8C14A31FD642}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vetsus.Infrastructure", "Vetsus.Infrastructure\Vetsus.Infrastructure.csproj", "{7D0C07D9-92F5-4048-A742-072F6CDEAAA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vetsus.Infrastructure", "Vetsus.Infrastructure\Vetsus.Infrastructure.csproj", "{7D0C07D9-92F5-4048-A742-072F6CDEAAA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vetsus.Persistence", "Vetsus.Persistence\Vetsus.Persistence.csproj", "{C9924680-5A30-4F58-B031-8D1DC5A16856}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vetsus.Persistence", "Vetsus.Persistence\Vetsus.Persistence.csproj", "{C9924680-5A30-4F58-B031-8D1DC5A16856}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Vetsus.DB", "Vetsus.DB\Vetsus.DB.sqlproj", "{BD72F5EA-A803-4B72-BB29-0FCDE5183C11}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{7BA1E2F2-0755-4AF5-BADB-11A27BF7411C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,12 @@ Global
 		{C9924680-5A30-4F58-B031-8D1DC5A16856}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9924680-5A30-4F58-B031-8D1DC5A16856}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9924680-5A30-4F58-B031-8D1DC5A16856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD72F5EA-A803-4B72-BB29-0FCDE5183C11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD72F5EA-A803-4B72-BB29-0FCDE5183C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD72F5EA-A803-4B72-BB29-0FCDE5183C11}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BD72F5EA-A803-4B72-BB29-0FCDE5183C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD72F5EA-A803-4B72-BB29-0FCDE5183C11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD72F5EA-A803-4B72-BB29-0FCDE5183C11}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +70,8 @@ Global
 		{2D4B94CD-3445-4762-A742-8C14A31FD642} = {644DF667-5D7D-4181-9249-CC3D31D48CAC}
 		{7D0C07D9-92F5-4048-A742-072F6CDEAAA5} = {DAA2732C-B343-43AD-9AD3-91014B472D1F}
 		{C9924680-5A30-4F58-B031-8D1DC5A16856} = {DAA2732C-B343-43AD-9AD3-91014B472D1F}
+		{BD72F5EA-A803-4B72-BB29-0FCDE5183C11} = {7BA1E2F2-0755-4AF5-BADB-11A27BF7411C}
+		{7BA1E2F2-0755-4AF5-BADB-11A27BF7411C} = {ACE80214-6AFE-4D49-80FF-E46CEE586706}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE26AB81-2A81-4463-AA4E-9DF7CD7209B7}
