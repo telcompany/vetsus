@@ -1,21 +1,24 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
-using Vetsus.Application.Interfaces.Persistence;
+using Vetsus.Application.DTO;
+using Vetsus.Application.Features.User.Commands;
+using Vetsus.Application.Features.User.Queries;
 using Vetsus.MVC.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Vetsus.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUnitOfWork _unitOrWOrk;
+        private readonly ISender _sender;
 
-        public HomeController(IUnitOfWork unitOrWOrk)
+        public HomeController(ISender sender)
         {
-            _unitOrWOrk = unitOrWOrk;
+            _sender = sender;
         }
 
         public IActionResult Index()
@@ -32,27 +35,12 @@ namespace Vetsus.MVC.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login()
         {
-            string userName = "Admin";
-            string password = "password";
+            string email = "user@vetsus.com";
+            string password = "12345678";
 
-            if (userName == "Admin" && password == "password")
-            {
-                // Create the identity for the user
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, userName),
-                    new Claim(ClaimTypes.Role, "Administrator"),
-                };
+            var result = await _sender.Send(new LoginUserQuery(email, password));
 
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var principal = new ClaimsPrincipal(claimsIdentity);
-                
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
-                return RedirectToAction("Privacy", "Home");
-            }
-
-            return View();
+            return RedirectToAction("Privacy", "Home");
         }
 
         [AllowAnonymous]
@@ -62,11 +50,12 @@ namespace Vetsus.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Test()
+        [AllowAnonymous]
+        public async Task<IActionResult> Register()
         {
-            var customers = await _unitOrWOrk.Customers.GetAsync(new Domain.Utilities.QueryParameters());
+            await _sender.Send(new RegisterUserCommand(new RegisterUserRequest("UserTest", "user@vetsus.com", "12345678")));
 
-            return View(customers);
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -69,11 +69,15 @@
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Tables\Permissions.sql" />
     <Build Include="dbo\Stored Procedures\spGetRecordsBySpecificColumn.sql" />
+    <Build Include="dbo\Stored Procedures\spInsertRecord.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Vetsus.DB.publish.xml" />
     <Build Include="dbo\Tables\Roles.sql" />
     <Build Include="dbo\Tables\UserRoles.sql" />
     <Build Include="dbo\Tables\RolePermissions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="dbo\SeedingScript.sql" />
   </ItemGroup>
 </Project>

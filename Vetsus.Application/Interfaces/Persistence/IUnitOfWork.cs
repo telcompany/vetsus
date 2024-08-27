@@ -3,6 +3,7 @@
     public interface IUnitOfWork : IDisposable
     {
         public ICustomerRepository Customers { get; }
+        public IUserRepository Users { get; }
 
         void BeginTransaction();
         void Commit();

@@ -8,6 +8,7 @@ namespace Vetsus.Persistence.Repositories.uow
         private bool _disposed;
         private readonly DapperDataContext _dapperDataContext;
         public ICustomerRepository Customers { get; private set; }
+        public IUserRepository Users { get; private set; }
 
         public UnitOfWork(DapperDataContext dapperDataContext)
         {
@@ -18,6 +19,7 @@ namespace Vetsus.Persistence.Repositories.uow
         private void Init()
         {
             Customers = new CustomerRepository(_dapperDataContext);
+            Users = new UserRepository(_dapperDataContext);
         }
 
         public void BeginTransaction()
