@@ -64,18 +64,21 @@
     <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Customers.sql" />
+    <Build Include="dbo\Tables\Owners.sql" />
     <Build Include="dbo\Stored Procedures\spGetRecords.sql" />
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Tables\Permissions.sql" />
     <Build Include="dbo\Stored Procedures\spGetRecordsBySpecificColumn.sql" />
     <Build Include="dbo\Stored Procedures\spInsertRecord.sql" />
+    <Build Include="dbo\Tables\Pets.sql" />
+    <Build Include="dbo\Tables\Species.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Vetsus.DB.publish.xml" />
     <Build Include="dbo\Tables\Roles.sql" />
     <Build Include="dbo\Tables\UserRoles.sql" />
     <Build Include="dbo\Tables\RolePermissions.sql" />
+    <Build Include="dbo\Stored Procedures\spGetUserPermissions.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\SeedingScript.sql" />

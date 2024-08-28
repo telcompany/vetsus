@@ -2,7 +2,7 @@
 
 namespace Vetsus.Application.Interfaces.Persistence
 {
-    public interface ICustomerRepository: IGenericRepository<Customer>
+    public interface IPetRepository: IGenericRepository<Pet>
     {
     }
 }

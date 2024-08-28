@@ -22,10 +22,9 @@ namespace Vetsus.Persistence.Repositories
             var parameters = new DynamicParameters();
             parameters.Add("userId", user.Id, DbType.String, ParameterDirection.Input, size: 22);
 
-            using (var connection = _dapperDataContext.Connection)
-            {
-                return await connection.QueryAsync<Permission>("spGetUserPermissions", parameters, commandType: CommandType.StoredProcedure);
-            }
+            using var connection = _dapperDataContext.Connection;
+
+            return await connection.QueryAsync<Permission>("spGetUserPermissions", parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

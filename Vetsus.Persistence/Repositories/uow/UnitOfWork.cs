@@ -7,8 +7,10 @@ namespace Vetsus.Persistence.Repositories.uow
     {
         private bool _disposed;
         private readonly DapperDataContext _dapperDataContext;
-        public ICustomerRepository Customers { get; private set; }
+        public IOwnerRepository Owners { get; private set; }
         public IUserRepository Users { get; private set; }
+        public IPetRepository Pets { get; private set; }
+        public ISpeciesRepository Species { get; private set; }
 
         public UnitOfWork(DapperDataContext dapperDataContext)
         {
@@ -18,8 +20,10 @@ namespace Vetsus.Persistence.Repositories.uow
 
         private void Init()
         {
-            Customers = new CustomerRepository(_dapperDataContext);
+            Owners = new OwnerRepository(_dapperDataContext);
             Users = new UserRepository(_dapperDataContext);
+            Pets = new PetRepository(_dapperDataContext);
+            Species = new SpeciesRepository(_dapperDataContext);
         }
 
         public void BeginTransaction()

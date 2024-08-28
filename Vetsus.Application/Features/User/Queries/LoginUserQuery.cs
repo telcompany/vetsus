@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
-using System.Net.Http;
 using System.Security.Claims;
 using Vetsus.Application.DTO;
 using Vetsus.Application.Exceptions;
 using Vetsus.Application.Interfaces.Persistence;
+using Vetsus.Application.Utilities;
 using Vetsus.Application.Wrappers;
+using Vetsus.Domain.Enums;
 
 namespace Vetsus.Application.Features.User.Queries
 {
@@ -39,11 +40,11 @@ namespace Vetsus.Application.Features.User.Queries
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Role, "Administrator"),
+                new Claim(ClaimTypes.Role, Role.Admin.ToString()),
             };
 
             foreach (var permission in await _unitOfWork.Users.GetUserPermissions(user))
-                claims.Add(new Claim("permissions", permission.Name));
+                claims.Add(new Claim(GlobalConstants.CustomClaims.Permissions, permission.Name));
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(claimsIdentity);

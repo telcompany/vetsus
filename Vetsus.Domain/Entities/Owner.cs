@@ -3,8 +3,8 @@ using Vetsus.Domain.Utilities;
 
 namespace Vetsus.Domain.Entities
 {
-    [TableName("Customers")]
-    public class Customer: IDbEntity
+    [TableName("Owners")]
+    public class Owner: IDbEntity
     {
         [PrimaryKey]
         [ColumnName("Id")]

@@ -33,3 +33,8 @@ VALUES      ('3YMZbxtOhiwTukZuZUp80a','YOfi2bZgwgIWq8RFxFWUOe'),('3YMZbxtOhiwTuk
             ('3YMZbxtOhiwTukZuZUp80a','-6c7C5G0nU6Gr5ljbYZpTg'),('3YMZbxtOhiwTukZuZUp80a','bZgwgIWq8RFxYOfi2FWUOe'),('3YMZbxtOhiwTukZuZUp80a','k2JQEVUgtxAwwaTAhd623d'),
             ('Gaig1ij2_WX-z81Yh_rvrU','YOfi2bZgwgIWq8RFxFWUOe'),('Gaig1ij2_WX-z81Yh_rvrU','flaI5ThsXk2VfVKLyfacSA'),('Gaig1ij2_WX-z81Yh_rvrU','bZgwgIWq8RFxYOfi2FWUOe'),
             ('ij2_WX-z81YhGaig1_rvrU','YOfi2bZgwgIWq8RFxFWUOe')
+
+--Users
+INSERT INTO [Users]
+            (Id,Email,UserName,PasswordHash)
+VALUES      ('lkmaDSX4AUW-dl8NyiBYAw','user@vetsus.com','user','$2a$11$AON5UqkZTQJtfNScBc8YE.05SpWrxoXrHuNI8OuSp13mKOkdEFO.G')
