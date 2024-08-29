@@ -3,8 +3,8 @@ using Vetsus.Domain.Utilities;
 
 namespace Vetsus.Domain.Entities
 {
-    [TableName("Permissions")]
-    public sealed class Permission : IDbEntity
+    [TableName("Specialties")]
+    public class Specialty: IDbEntity
     {
         [PrimaryKey]
         [ColumnName("Id")]

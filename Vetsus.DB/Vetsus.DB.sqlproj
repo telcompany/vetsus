@@ -72,6 +72,9 @@
     <Build Include="dbo\Stored Procedures\spInsertRecord.sql" />
     <Build Include="dbo\Tables\Pets.sql" />
     <Build Include="dbo\Tables\Species.sql" />
+    <Build Include="dbo\Tables\Vets.sql" />
+    <Build Include="dbo\Tables\Specialties.sql" />
+    <Build Include="dbo\Tables\SpecialtiesVets.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Vetsus.DB.publish.xml" />
