@@ -30,6 +30,5 @@ namespace Vetsus.Application.Features.Owner.Queries
 
             return new Response<OwnerResponse>(response);
         }
-
     }
 }
