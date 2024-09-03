@@ -4,9 +4,9 @@ using Vetsus.Persistence.Contexts;
 
 namespace Vetsus.Persistence.Repositories
 {
-    public sealed class CustomerRepository : GenericRepository<Customer>, ICustomerRepository
+    public sealed class PetRepository: GenericRepository<Pet>, IPetRepository
     {
-        public CustomerRepository(DapperDataContext dapperDataContext) : base(dapperDataContext)
+        public PetRepository(DapperDataContext dapperDataContext) : base(dapperDataContext)
         {
         }
     }

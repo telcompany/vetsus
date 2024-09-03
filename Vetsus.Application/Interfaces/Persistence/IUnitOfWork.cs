@@ -2,7 +2,11 @@
 {
     public interface IUnitOfWork : IDisposable
     {
-        public ICustomerRepository Customers { get; }
+        public IOwnerRepository Owners { get; }
+        public IUserRepository Users { get; }
+        public IPetRepository Pets { get; }
+        public ISpeciesRepository Species { get; }
+        public IVetRepository Vets { get; }
 
         void BeginTransaction();
         void Commit();

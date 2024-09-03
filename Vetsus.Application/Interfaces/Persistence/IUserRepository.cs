@@ -1,4 +1,7 @@
-﻿using Vetsus.Domain.Entities;
+﻿using Vetsus.Application.DTO;
+using Vetsus.Application.Utilities;
+using Vetsus.Domain.Entities;
+using Vetsus.Domain.QueryParameters;
 
 namespace Vetsus.Application.Interfaces.Persistence
 {
@@ -6,5 +9,6 @@ namespace Vetsus.Application.Interfaces.Persistence
     {
         public Task<User> GetUserByEmail(string email);
         public Task<IEnumerable<Permission>> GetUserPermissions(User user);
+        public Task<PageList<UserResponse>> GetUsersByQueryAsync(UserQueryParameters queryParameters);
     }
 }
