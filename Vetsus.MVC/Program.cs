@@ -17,6 +17,7 @@ builder.Services
     .AddCookie(options =>
     {
         options.Cookie.Name = "VetsusCookie";
+        options.LoginPath = $"/Auth/Login";
     });
 
 var app = builder.Build();
