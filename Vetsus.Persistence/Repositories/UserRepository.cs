@@ -32,9 +32,9 @@ namespace Vetsus.Persistence.Repositories
 
         public async Task<PageList<UserResponse>> GetUsersByQueryAsync(UserQueryParameters queryParameters)
         {
-            var records = (await GetAsync(queryParameters, "Email", "UserName"))
+            var records = (await GetAsync(queryParameters,"Id", "Email", "UserName"))
                         .AsQueryable()
-                        .Select(e => new UserResponse(e.Email, e.UserName));
+                        .Select(e => new UserResponse(e.Id, e.Email, e.UserName));
 
             if (!string.IsNullOrEmpty(queryParameters.Email))
                 records = records.Where(e => e.Email.ToLowerInvariant().Contains(queryParameters.Email.ToLowerInvariant()));
@@ -44,7 +44,7 @@ namespace Vetsus.Persistence.Repositories
                     records = records.OrderByCustom(queryParameters.SortBy, queryParameters.SortOrder);
 
 
-            var pagedRecords = PageList<UserResponse>.Create(records, queryParameters.PageNo, queryParameters.PageSize, 2000000);
+            var pagedRecords = PageList<UserResponse>.Create(records, queryParameters.PageNo, queryParameters.PageSize, records.Count());
 
             return pagedRecords;
         }
