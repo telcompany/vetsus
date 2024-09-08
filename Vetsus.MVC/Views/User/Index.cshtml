@@ -18,80 +18,17 @@
                 <h4 class="card-title">Listado de usuarios</h4>
             </div>
             <div class="card-body">
+                <div class="d-md-flex d-block mb-3 pb-3">
+                    <div class="card-action card-tabs mb-md-0 mb-3  mr-auto">
+                    </div>
+                    <div>
+                        <a href="javascript:void(0)" onclick="addUser()" class="btn btn-primary rounded">
+                            <i class="fa fa-plus mr-2 fa-1x" aria-hidden="true"></i>Nuevo usuario
+                        </a>
+                        @*<a href="javascript:void(0)" data-toggle="modal" data-target="#addUserModal" class="btn btn-primary rounded"><i class="fa fa-user mr-2 scale5" aria-hidden="true"></i>+ New Contact</a>*@
+                    </div>
+				</div>
                 <div class="table-responsive">
-                    @*<table class="table table-responsive-md">
-                        <thead>
-                            <tr>
-                                <th class="width80"><strong>#</strong></th>
-                                <th><strong>PATIENT</strong></th>
-                                <th><strong>DR NAME</strong></th>
-                                <th><strong>DATE</strong></th>
-                                <th><strong>STATUS</strong></th>
-                                <th><strong>PRICE</strong></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>01</strong></td>
-                                <td>Mr. Bobby</td>
-                                <td>Dr. Jackson</td>
-                                <td>01 August 2020</td>
-                                <td><span class="badge light badge-success">Successful</span></td>
-                                <td>$21.56</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn btn-success light sharp" data-toggle="dropdown">
-                                            <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24" /><circle fill="#000000" cx="5" cy="12" r="2" /><circle fill="#000000" cx="12" cy="12" r="2" /><circle fill="#000000" cx="19" cy="12" r="2" /></g></svg>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item" href="#">Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>02</strong></td>
-                                <td>Mr. Bobby</td>
-                                <td>Dr. Jackson</td>
-                                <td>01 August 2020</td>
-                                <td><span class="badge light badge-danger">Canceled</span></td>
-                                <td>$21.56</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn btn-danger light sharp" data-toggle="dropdown">
-                                            <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24" /><circle fill="#000000" cx="5" cy="12" r="2" /><circle fill="#000000" cx="12" cy="12" r="2" /><circle fill="#000000" cx="19" cy="12" r="2" /></g></svg>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item" href="#">Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>03</strong></td>
-                                <td>Mr. Bobby</td>
-                                <td>Dr. Jackson</td>
-                                <td>01 August 2020</td>
-                                <td><span class="badge light badge-warning">Pending</span></td>
-                                <td>$21.56</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn btn-warning light sharp" data-toggle="dropdown">
-                                            <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24" /><circle fill="#000000" cx="5" cy="12" r="2" /><circle fill="#000000" cx="12" cy="12" r="2" /><circle fill="#000000" cx="19" cy="12" r="2" /></g></svg>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item" href="#">Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>*@
-
                     <table id="tblUsers"
                            class="table table-responsive-md"
                            data-ajax="ajaxRequest"
@@ -100,13 +37,46 @@
                            data-page-list="[10, 25, 50, 100]">
                         <thead>
                             <tr>
-                                <th data-field="id">ID</th>
                                 <th data-field="email">Email</th>
                                 <th data-field="username">Username</th>
+                                <th data-field="id" data-formatter="actionFormatter">Acciones</th>
                             </tr>
                         </thead>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addUserModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="lblTitleModal" class="modal-title">Nuevo usuario</h5>
+                <button type="button" class="close" onclick="closeModal()">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="text-black font-w500">Email</label>
+                        <input type="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-black font-w500">Username</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-black font-w500">Contraseña</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-light" onclick="closeModal()">Cerrar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
