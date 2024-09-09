@@ -30,16 +30,39 @@ function actionFormatter(id, row, index) {
 
 function addUser() {
     $('#lblTitleModal').text('Nuevo usuario');
-    $('#addUserModal').modal('show');
+    $('#userModal').modal('show');
+}
+
+function addUserAction() {
+    let request = {
+        Username: $('#username').val(),
+        Email: $('#email').val(),
+        Password: $('#password').val()
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/User/Add',
+        data: request,
+        success: function (response) {
+            console.log(' success - response >', response)
+        },
+        failure: function (response) {
+            console.log(' failure - response >', response)
+        },
+        error: function (response) {
+            console.log(' error - response >', response)
+        }
+    });
 }
 
 function closeModal() {
-    $('#addUserModal').modal('hide');
+    $('#userModal').modal('hide');
 }
 
 function editUser(id) {
     $('#lblTitleModal').text('Editar usuario')
-    $('#addUserModal').modal('show'); 
+    $('#userModal').modal('show'); 
     console.log('id >', id);
 }
 

@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Vetsus.Application.DTO;
+using Vetsus.Application.Features.User.Commands;
 using Vetsus.Application.Features.User.Queries;
 using Vetsus.Domain.QueryParameters;
 
@@ -35,5 +37,13 @@ namespace Vetsus.MVC.Controllers
 
 			return Json(response);
 		}
-	}
+
+        [HttpPost]
+        public async Task<IActionResult> Add(RegisterUserRequest request)
+        {
+			var response = await _sender.Send(new RegisterUserCommand(request));
+
+			return Json(response);
+        }
+    }
 }
