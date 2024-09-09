@@ -50,14 +50,6 @@ namespace Vetsus.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        [AllowAnonymous]
-        public async Task<IActionResult> Register()
-        {
-            await _sender.Send(new RegisterUserCommand(new RegisterUserRequest("UserTest", "user@vetsus.com", "12345678")));
-
-            return RedirectToAction("Index");
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

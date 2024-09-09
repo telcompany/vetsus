@@ -41,6 +41,7 @@ namespace Vetsus.Application.Features.User.Queries
             {
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Role, Role.Admin.ToString()),
+                new Claim(GlobalConstants.CustomClaims.UserId, user.Id)
             };
 
             foreach (var permission in await _unitOfWork.Users.GetUserPermissions(user))

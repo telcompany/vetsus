@@ -12,6 +12,7 @@ namespace Vetsus.Persistence.Repositories.uow
         public IPetRepository Pets { get; private set; }
         public ISpeciesRepository Species { get; private set; }
         public IVetRepository Vets { get; private set; }
+        public IRoleRepository Roles { get; private set; }
 
         public UnitOfWork(DapperDataContext dapperDataContext)
         {
@@ -26,6 +27,7 @@ namespace Vetsus.Persistence.Repositories.uow
             Pets = new PetRepository(_dapperDataContext);
             Species = new SpeciesRepository(_dapperDataContext);
             Vets = new VetRepository(_dapperDataContext);
+            Roles = new RoleRepository(_dapperDataContext);
         }
 
         public void BeginTransaction()

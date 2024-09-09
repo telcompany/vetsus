@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Usuarios";
 }
 
@@ -25,7 +26,6 @@
                         <a href="javascript:void(0)" onclick="addUser()" class="btn btn-primary rounded">
                             <i class="fa fa-plus mr-2 fa-1x" aria-hidden="true"></i>Nuevo usuario
                         </a>
-                        @*<a href="javascript:void(0)" data-toggle="modal" data-target="#addUserModal" class="btn btn-primary rounded"><i class="fa fa-user mr-2 scale5" aria-hidden="true"></i>+ New Contact</a>*@
                     </div>
 				</div>
                 <div class="table-responsive">
@@ -39,6 +39,7 @@
                             <tr>
                                 <th data-field="email">Email</th>
                                 <th data-field="username">Username</th>
+                                <th data-field="role">Rol</th>
                                 <th data-field="id" data-formatter="actionFormatter">Acciones</th>
                             </tr>
                         </thead>
@@ -62,15 +63,23 @@
                 <form id="userModalForm">
                     <div class="form-group">
                         <label class="text-black font-w500">Email</label>
-                        <input id="email" name="email" type="email" class="form-control">
+                        <input id="email" name="email" type="email" class="form-control input-rounded">
                     </div>
                     <div class="form-group">
                         <label class="text-black font-w500">Username</label>
-                        <input id="username" name="username" type="text" class="form-control">
+                        <input id="username" name="username" type="text" class="form-control input-rounded">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-black font-w500">Rol</label>
+                        <select id="ddRole" name="ddRole" class="form-control default-select">
+                            <option value="Admin">Administrador</option>
+                            <option value="User">Usuario</option>
+                            <option value="Visitor">Invitado</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label class="text-black font-w500">Contraseña</label>
-                        <input id="password" name="password" type="text" class="form-control">
+                        <input id="password" name="password" type="text" class="form-control input-rounded">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-primary" onclick="addUserAction()">Guardar</button>
@@ -85,5 +94,8 @@
 
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.js"></script>
+    <script>
+        const USER_ID = '@Html.Raw(ViewBag.UserId)';
+    </script>
     <script src="~/custom/user.js"></script>
 }

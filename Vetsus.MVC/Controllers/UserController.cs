@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using Vetsus.Application.DTO;
 using Vetsus.Application.Features.User.Commands;
 using Vetsus.Application.Features.User.Queries;
+using Vetsus.Application.Utilities;
 using Vetsus.Domain.QueryParameters;
 
 namespace Vetsus.MVC.Controllers
@@ -20,6 +22,9 @@ namespace Vetsus.MVC.Controllers
 
 		public IActionResult Index()
         {
+            var userId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == GlobalConstants.CustomClaims.UserId)?.Value;
+			ViewBag.UserId = userId;
+
             return View();
         }
 
@@ -27,7 +32,7 @@ namespace Vetsus.MVC.Controllers
 		public async Task<IActionResult> GetAll(int offset, int limit)
 		{
 			var queryParameters = new UserQueryParameters() {
-				PageNo = offset + 1,
+				PageNo = offset / limit + 1,
 				PageSize = limit
 			};
 			var result = await _sender.Send(new GetUsersQuery(queryParameters));

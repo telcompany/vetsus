@@ -3,7 +3,7 @@
 });
 
 function initBootstrapTable() {
-    $('#tblUsers').bootstrapTable()
+    $('#tblUsers').bootstrapTable();
 }
 
 function ajaxRequest(params) {
@@ -16,6 +16,10 @@ function ajaxRequest(params) {
 }
 
 function actionFormatter(id, row, index) {
+    if (id == USER_ID) {
+        return '-';
+    }
+
     var userId = "'" + id + "'";
     return [
         '<a href="javascript:void(0)" title="Editar" onclick="editUser(' + userId + ')"',
@@ -37,21 +41,31 @@ function addUserAction() {
     let request = {
         Username: $('#username').val(),
         Email: $('#email').val(),
-        Password: $('#password').val()
+        Password: $('#password').val(),
+        Role: $('#ddRole option:selected').val()
     }
 
     $.ajax({
         type: 'POST',
         url: '/User/Add',
         data: request,
+        beforeSend: function () {
+            console.log(' beforeSend')
+        },
         success: function (response) {
             console.log(' success - response >', response)
+            closeModal();
+            $('#tblUsers').bootstrapTable('refresh');
         },
         failure: function (response) {
             console.log(' failure - response >', response)
         },
         error: function (response) {
             console.log(' error - response >', response)
+        },
+        complete: function (response) {
+            //Hide loader
+            console.log(' complete - response >', response)
         }
     });
 }

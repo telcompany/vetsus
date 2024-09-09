@@ -77,6 +77,8 @@
     <Build Include="dbo\Tables\SpecialtiesVets.sql" />
     <Build Include="dbo\Stored Procedures\spGetRecordsById.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateRecord.sql" />
+    <Build Include="dbo\Stored Procedures\spInsertUserRole.sql" />
+    <Build Include="dbo\Stored Procedures\spGetUserRecords.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Vetsus.DB.publish.xml" />
