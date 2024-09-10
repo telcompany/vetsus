@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using System;
 using System.Data;
 using Vetsus.Application.DTO;
 using Vetsus.Application.Interfaces.Persistence;
@@ -31,6 +32,16 @@ namespace Vetsus.Persistence.Repositories
         public async Task<User> GetUserByEmail(string email)
         {
             return (await GetBySpecificColumnAsync("Email", email)).AsQueryable().FirstOrDefault();
+        }
+
+        public async Task<UserByIdResponse> GetUserByIdQueryAsync(string id)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("id", id, DbType.String, ParameterDirection.Input, size: 22);
+
+            using var connection = _dapperDataContext.Connection;
+
+            return await connection.QuerySingleOrDefaultAsync<UserByIdResponse>("spGetUserById", parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<Permission>> GetUserPermissions(User user)

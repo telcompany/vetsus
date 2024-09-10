@@ -79,6 +79,7 @@
     <Build Include="dbo\Stored Procedures\spUpdateRecord.sql" />
     <Build Include="dbo\Stored Procedures\spInsertUserRole.sql" />
     <Build Include="dbo\Stored Procedures\spGetUserRecords.sql" />
+    <Build Include="dbo\Stored Procedures\spGetUserById.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Vetsus.DB.publish.xml" />

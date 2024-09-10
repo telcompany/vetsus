@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using Vetsus.Application.DTO;
 using Vetsus.Application.Features.User.Commands;
 using Vetsus.Application.Features.User.Queries;
@@ -28,7 +27,14 @@ namespace Vetsus.MVC.Controllers
             return View();
         }
 
-		[HttpGet]
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
+        #region API_CALLS
+
+        [HttpGet]
 		public async Task<IActionResult> GetAll(int offset, int limit)
 		{
 			var queryParameters = new UserQueryParameters() {
@@ -43,6 +49,14 @@ namespace Vetsus.MVC.Controllers
 			return Json(response);
 		}
 
+        [HttpGet]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var response = await _sender.Send(new GetUserByIdQuery(id));
+
+            return Json(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Add(RegisterUserRequest request)
         {
@@ -50,5 +64,15 @@ namespace Vetsus.MVC.Controllers
 
 			return Json(response);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(UpdateUserRequest request)
+        {
+            var response = await _sender.Send(new UpdateUserCommand(request));
+
+            return Json(response);
+        }
+
+        #endregion
     }
 }
