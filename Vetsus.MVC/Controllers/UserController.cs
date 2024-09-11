@@ -6,6 +6,7 @@ using Vetsus.Application.Features.User.Commands;
 using Vetsus.Application.Features.User.Queries;
 using Vetsus.Application.Utilities;
 using Vetsus.Domain.QueryParameters;
+using Vetsus.MVC.ViewModels;
 
 namespace Vetsus.MVC.Controllers
 {
@@ -24,7 +25,17 @@ namespace Vetsus.MVC.Controllers
             var userId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == GlobalConstants.CustomClaims.UserId)?.Value;
 			ViewBag.UserId = userId;
 
-            return View();
+            var indexVM = new IndexViewModel
+            {
+                BreadCrumb = new BreadCrumbViewModel
+                {
+                    Title = "Gestión",
+                    Subtitle = "Usuarios"
+                },
+                PageTitle = "Listado de usuarios"
+            };
+
+            return View(indexVM);
         }
 
         public IActionResult Profile()

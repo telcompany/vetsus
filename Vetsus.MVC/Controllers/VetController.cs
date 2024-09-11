@@ -5,7 +5,7 @@ using Vetsus.MVC.ViewModels;
 namespace Vetsus.MVC.Controllers
 {
 	[Authorize]
-	public class OwnerController : Controller
+	public class VetController : Controller
     {
         public IActionResult Index()
         {
@@ -14,9 +14,9 @@ namespace Vetsus.MVC.Controllers
                 BreadCrumb = new BreadCrumbViewModel
                 {
                     Title = "Gestión",
-                    Subtitle = "Dueños"
+                    Subtitle = "Doctores"
                 },
-                PageTitle = "Listado de dueños"
+                PageTitle = "Listado de doctores"
             };
 
             return View(indexVM);

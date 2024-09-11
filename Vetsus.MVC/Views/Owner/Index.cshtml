@@ -1,10 +1,11 @@
-﻿@{
+﻿@using Vetsus.MVC.ViewModels;
+
+@model IndexViewModel
+
+@{
 	ViewData["Title"] = "Dueños";
 }
 
-<div class="page-titles">
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="javascript:void(0)">Gestión</a></li>
-		<li class="breadcrumb-item active"><a href="javascript:void(0)">Dueños</a></li>
-	</ol>
-</div>
+<partial name="_BreadCrumbPartial" model="Model.BreadCrumb" />
+
+
