@@ -62,16 +62,13 @@ function addOrEditUserAction() {
         beforeSend: function () {
             console.log(' beforeSend')
         },
-        success: function (response) {
-            console.log(' success - response >', response)
+        success: function () {
             closeModal();
             $('#tblUsers').bootstrapTable('refresh');
         },
-        failure: function (response) {
-            console.log(' failure - response >', response)
-        },
         error: function (response) {
-            console.log(' error - response >', response)
+            const data = response.responseJSON;
+            alert(data.Message)
         },
         complete: function (response) {
             //Hide loader
@@ -104,11 +101,9 @@ function editUser(id) {
             $('#email').val(data.email)
             $('#ddRole').val(data.role).change()
         },
-        failure: function (response) {
-            console.log(' failure - response >', response)
-        },
         error: function (response) {
-            console.log(' error - response >', response)
+            const data = response.responseJSON;
+            alert(data.Message)
         },
         complete: function (response) {
             //Hide loader

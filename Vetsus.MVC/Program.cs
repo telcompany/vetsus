@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Vetsus.Application.Configuration;
+using Vetsus.MVC.Extensions;
 using Vetsus.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +38,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UserErrorHandlingMiddleware();
 
 app.MapControllerRoute(
     name: "default",
