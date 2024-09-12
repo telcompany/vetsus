@@ -37,11 +37,13 @@ namespace Vetsus.Application.Features.User.Queries
                 throw new InvalidCredentialException("Las credenciales del usuario no son válidas");
             }
 
-            var claims = new List<Claim>
+			var role = (await _unitOfWork.Users.GetUserByIdQueryAsync(user.Id)).Role;
+
+			var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Role, Role.Admin.ToString()),
-                new Claim(GlobalConstants.CustomClaims.UserId, user.Id)
+                new Claim(ClaimTypes.Role, role),
+                new Claim(ClaimTypes.Sid, user.Id)
             };
 
             foreach (var permission in await _unitOfWork.Users.GetUserPermissions(user))

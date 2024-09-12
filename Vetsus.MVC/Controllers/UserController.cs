@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using Vetsus.Application.DTO;
 using Vetsus.Application.Features.User.Commands;
 using Vetsus.Application.Features.User.Queries;
-using Vetsus.Application.Utilities;
 using Vetsus.Domain.QueryParameters;
 using Vetsus.MVC.ViewModels;
 
 namespace Vetsus.MVC.Controllers
 {
-    [Authorize]
+	[Authorize]
     public class UserController : Controller
     {
 		private readonly ISender _sender;
@@ -22,7 +22,7 @@ namespace Vetsus.MVC.Controllers
 
 		public IActionResult Index()
         {
-            var userId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == GlobalConstants.CustomClaims.UserId)?.Value;
+            var userId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Sid)?.Value;
 			ViewBag.UserId = userId;
 
             var indexVM = new IndexViewModel
