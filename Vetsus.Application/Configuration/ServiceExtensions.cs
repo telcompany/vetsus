@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Vetsus.Application.Interfaces;
 
 namespace Vetsus.Application.Configuration
 {
@@ -13,7 +14,8 @@ namespace Vetsus.Application.Configuration
             });
 
             services.AddHttpContextAccessor();
-        }
+			services.AddScoped<IUserService, UserService>();
+		}
     }
 
 }

@@ -7,6 +7,7 @@
         public IPetRepository Pets { get; }
         public ISpeciesRepository Species { get; }
         public IVetRepository Vets { get; }
+        public IRoleRepository Roles { get; }
 
         void BeginTransaction();
         void Commit();

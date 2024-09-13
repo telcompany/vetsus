@@ -18,7 +18,7 @@ namespace Vetsus.Application.Features.User.Queries
         }
         public async Task<Response<PageList<UserResponse>>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
-            var result = await _unitOfWork.Users.GetUsersByQueryAsync(request.QueryParameters);
+            var result = await _unitOfWork.Users.GetUsersWithRoleByQueryAsync(request.QueryParameters);
 
             return new Response<PageList<UserResponse>>(result);
         }

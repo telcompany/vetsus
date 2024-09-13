@@ -37,4 +37,9 @@ VALUES      ('3YMZbxtOhiwTukZuZUp80a','YOfi2bZgwgIWq8RFxFWUOe'),('3YMZbxtOhiwTuk
 --Users
 INSERT INTO [Users]
             (Id,Email,UserName,PasswordHash)
-VALUES      ('lkmaDSX4AUW-dl8NyiBYAw','user@vetsus.com','user','$2a$11$AON5UqkZTQJtfNScBc8YE.05SpWrxoXrHuNI8OuSp13mKOkdEFO.G')
+VALUES      ('lkmaDSX4AUW-dl8NyiBYAw','admin@vetsus.com','admin','$2a$11$AON5UqkZTQJtfNScBc8YE.05SpWrxoXrHuNI8OuSp13mKOkdEFO.G')
+
+--UserRoles
+INSERT INTO [UserRoles]
+            (UserId,RoleId)
+VALUES      ('lkmaDSX4AUW-dl8NyiBYAw', '3YMZbxtOhiwTukZuZUp80a')
