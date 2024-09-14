@@ -23,11 +23,11 @@ function actionFormatter(id, row, index) {
 
     var userId = "'" + id + "'";
     return [
-        '<a href="javascript:void(0)" title="Editar" onclick="editUser(' + userId + ')"',
+        '<a href="javascript:void(0)" title="Editar usuario" onclick="editUser(' + userId + ')"',
         '<i class="fa fa-pencil fa-2x"></i>',
         '</a>  ',
         '&nbsp;&nbsp;',
-        '<a href="javascript:void(0)" title="Eliminar" onclick="deleteUser(' + userId + ')">',
+        '<a href="javascript:void(0)" title="Eliminar usuario" onclick="deleteUser(' + userId + ')">',
         '<i class="fa fa-trash fa-2x"></i>',
         '</a>'
     ].join('')
@@ -113,7 +113,29 @@ function editUser(id) {
 }
 
 function deleteUser(id) {
-    console.log('id >', id);
+    let result = confirm('¿Estás seguro(a) de eliminar este usuario?')
+    if (result) {
+        $.ajax({
+            type: 'DELETE',
+            url: '/User/Delete',
+            data: { id },
+            beforeSend: function () {
+                console.log(' beforeSend')
+            },
+            success: function () {
+                alert('Usuario eliminado correctamente')
+                $('#tblUsers').bootstrapTable('refresh')
+            },
+            error: function (response) {
+                const data = response.responseJSON;
+                alert(data.Message)
+            },
+            complete: function (response) {
+                //Hide loader
+                console.log(' complete - response >', response)
+            }
+        });
+    }
 }
 
 function clearFields() {

@@ -84,6 +84,14 @@ namespace Vetsus.MVC.Controllers
             return Json(response);
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _sender.Send(new DeleteUserCommand(id));
+
+            return Json(null);
+        }
+
         #endregion
     }
 }

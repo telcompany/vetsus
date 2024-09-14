@@ -19,6 +19,7 @@ BEGIN
 	inner join Roles r on ur.RoleId = r.Id
 	cross join total t
 	where u.PagingOrder > @previousPagelastPageNumber
+	and u.IsDeleted = 0
 	order by u.PagingOrder
 	';
 

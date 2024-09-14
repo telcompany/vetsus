@@ -80,6 +80,8 @@
     <Build Include="dbo\Stored Procedures\spInsertUserRole.sql" />
     <Build Include="dbo\Stored Procedures\spGetUserRecords.sql" />
     <Build Include="dbo\Stored Procedures\spGetUserById.sql" />
+    <Build Include="dbo\Stored Procedures\spSoftDeleteRecord.sql" />
+    <Build Include="dbo\Stored Procedures\spSoftDeleteForeignKeyRecord.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Vetsus.DB.publish.xml" />
