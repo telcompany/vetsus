@@ -13,7 +13,8 @@ BEGIN
 	IF @columns IS NULL
 	   SET @columns = '*';
 
-	SET @sql= N'SELECT TOP ('+CONVERT(VARCHAR(7),@pageSize)+') '+ @columns + ' FROM ' + QUOTENAME(@tableName)+ ' WHERE PagingOrder > @previousPagelastPageNumber ORDER BY PagingOrder';
+	SET @sql= N'SELECT TOP ('+CONVERT(VARCHAR(7),@pageSize)+') '+ @columns + ' FROM ' + QUOTENAME(@tableName)+ 
+	' WHERE PagingOrder > @previousPagelastPageNumber and IsDeleted = 0 ORDER BY PagingOrder';
 
 	EXEC sp_executesql @sql,N'@previousPagelastPageNumber INT',@previousPagelastPageNumber;
 END
