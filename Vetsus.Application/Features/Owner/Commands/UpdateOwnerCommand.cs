@@ -32,5 +32,4 @@ namespace Vetsus.Application.Features.Owner.Commands
             return Unit.Value;
         }
     }
-
 }

@@ -51,3 +51,46 @@ function openModal(id) {
         }
     });
 }
+
+function closeModal() {
+    $('#vetModal').modal('hide');
+}
+
+function addOrEditVetAction() {
+    var formData = $('#vetModalForm').serializeArray()
+
+    const id = formData.find(x => x.name == 'Id').value;
+    const URL = id == '' ? '/Vet/Add' : '/Vet/Update'
+    const request = onGenerateJson(formData);
+
+    $.ajax({
+        type: 'POST',
+        url: URL,
+        data: request,
+        beforeSend: function () {
+            console.log(' beforeSend')
+        },
+        success: function () {
+            closeModal();
+            $('#tblVets').bootstrapTable('refresh');
+        },
+        error: function (response) {
+            const data = response.responseJSON;
+            alert(data.Message)
+        },
+        complete: function (response) {
+            //Hide loader
+            console.log(' complete - response >', response)
+        }
+    });
+}
+
+function onGenerateJson(formData) {
+    var jsonData = {};
+    formData.forEach(function (item) {
+        var columnName = item.name;
+        jsonData[columnName] = item.value;
+    });
+
+    return jsonData;
+}

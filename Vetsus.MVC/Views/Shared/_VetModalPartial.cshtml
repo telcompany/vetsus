@@ -5,13 +5,13 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 id="lblTitleModal" class="modal-title">@(Model.Id != "" ? "Editar" : "Crear")  doctor</h5>
+            <h5 id="lblTitleModal" class="modal-title">@(Model.Id != "" ? "Editar" : "Nuevo")  doctor</h5>
             <button type="button" class="close" onclick="closeModal()">
                 <span>&times;</span>
             </button>
         </div>
         <div class="modal-body">
-            <form id="vetModalForm" method="post" asp-action="Add">
+            <form id="vetModalForm">
                 <input asp-for="Id" hidden />
                 <div class="form-group">
                     <label class="text-black font-w500" asp-for="Firstname">Nombres</label>
@@ -26,7 +26,7 @@
                     <input asp-for="Phone" class="form-control input-rounded">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">@(Model.Id != "" ? "Actualizar" : "Guardar")</button>
+                    <button type="button" class="btn btn-primary" onclick="addOrEditVetAction()">@(Model.Id != "" ? "Actualizar" : "Guardar")</button>
                     <button type="button" class="btn btn-light" onclick="closeModal()">Cerrar</button>
                 </div>
             </form>

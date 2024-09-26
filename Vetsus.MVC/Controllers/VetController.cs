@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vetsus.Application.DTO;
+using Vetsus.Application.Features.User.Commands;
 using Vetsus.Application.Features.Vet.Command;
 using Vetsus.Application.Features.Vet.Queries;
 using Vetsus.Domain.QueryParameters;
@@ -66,20 +67,28 @@ namespace Vetsus.MVC.Controllers
             return Json(response);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetById(string id)
-        {
-            var response = await _sender.Send(new GetVetByIdQuery(id));
-
-            return Json(response);
-        }
-
         [HttpPost]
         public async Task<IActionResult> Add(CreateVetRequest request)
         {
             var response = await _sender.Send(new AddVetCommand(request));
 
             return Json(response);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateVetRequest request)
+        {
+            var response = await _sender.Send(new UpdateVetCommand(request));
+
+            return Json(response);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _sender.Send(new DeleteVetCommand(id));
+
+            return Json(null);
         }
     }
 }
