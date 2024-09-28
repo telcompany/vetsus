@@ -1,4 +1,6 @@
-﻿using Vetsus.Application.DTO;
+﻿using Dapper;
+using System.Data;
+using Vetsus.Application.DTO;
 using Vetsus.Application.Interfaces.Persistence;
 using Vetsus.Application.Utilities;
 using Vetsus.Domain.Entities;
@@ -15,21 +17,18 @@ namespace Vetsus.Persistence.Repositories
 
         public async Task<PageList<VetResponse>> GetVetsByQueryAsync(VetQueryParameters queryParameters)
         {
-            var records = (await GetAsync(queryParameters, "Id", "FirstName", "LastName", "Phone"))
-                            .AsQueryable()
-                            .Select(e => new VetResponse(e.Id, e.FirstName, e.LastName, e.Phone));
+            var parameters = new DynamicParameters();
+            parameters.Add("pageNumber", queryParameters.PageNo, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("pageSize", queryParameters.PageSize, DbType.Int32, ParameterDirection.Input);
+
+            using var connection = _dapperDataContext.Connection;
+
+            var records = await connection.QueryAsync<VetResponse>("spGetVetRecords", parameters, commandType: CommandType.StoredProcedure);
 
             if (!string.IsNullOrEmpty(queryParameters.Name))
-                records = records.Where(e =>
-                    e.FirstName.ToLowerInvariant().Contains(queryParameters.Name.ToLowerInvariant())
-                    );
+                records = records.Where(e => e.FirstName.ToLowerInvariant().Contains(queryParameters.Name.ToLowerInvariant()));
 
-            if (!string.IsNullOrEmpty(queryParameters.SortBy))
-                if (typeof(Owner).GetProperty(queryParameters.SortBy) != null)
-                    records = records.OrderByCustom(queryParameters.SortBy, queryParameters.SortOrder);
-
-
-            var pagedRecords = PageList<VetResponse>.Create(records, queryParameters.PageNo, queryParameters.PageSize, 2000000);
+            var pagedRecords = PageList<VetResponse>.Create(records, queryParameters.PageNo, queryParameters.PageSize, records != null && records.Any() ? records.First().Total : 0);
 
             return pagedRecords;
         }
