@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vetsus.Application.DTO;
-using Vetsus.Application.Features.User.Commands;
+using Vetsus.Application.Features.User.Queries;
 using Vetsus.Application.Features.Vet.Command;
 using Vetsus.Application.Features.Vet.Queries;
 using Vetsus.Domain.QueryParameters;
@@ -14,15 +14,12 @@ namespace Vetsus.MVC.Controllers
 	public class VetController : Controller
     {
         private readonly ISender _sender;
+        private readonly IndexViewModel _indexVM;
 
         public VetController(ISender sender)
         {
             _sender = sender;
-        }
-
-        public IActionResult Index()
-        {
-            var indexVM = new IndexViewModel
+            _indexVM = new IndexViewModel
             {
                 BreadCrumb = new BreadCrumbViewModel
                 {
@@ -31,8 +28,11 @@ namespace Vetsus.MVC.Controllers
                 },
                 PageTitle = "Listado de doctores"
             };
+        }
 
-            return View(indexVM);
+        public IActionResult Index()
+        {
+            return View(_indexVM);
         }
 
         [HttpPost]
@@ -67,6 +67,14 @@ namespace Vetsus.MVC.Controllers
             return Json(response);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var response = await _sender.Send(new GetVetByIdQuery(id));
+
+            return Json(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Add(CreateVetRequest request)
         {
@@ -75,7 +83,7 @@ namespace Vetsus.MVC.Controllers
             return Json(response);
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> Update(UpdateVetRequest request)
         {
             var response = await _sender.Send(new UpdateVetCommand(request));

@@ -1,8 +1,5 @@
-﻿@using Vetsus.MVC.ViewModels;
-
-@model VetViewModel
-
-<div class="modal-dialog" role="document">
+﻿
+@*<div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
             <h5 id="lblTitleModal" class="modal-title">@(Model.Id != "" ? "Editar" : "Nuevo")  doctor</h5>
@@ -11,25 +8,62 @@
             </button>
         </div>
         <div class="modal-body">
-            <form id="vetModalForm">
+            <form id="vetModalForm" asp-action="Add">
                 <input asp-for="Id" hidden />
                 <div class="form-group">
                     <label class="text-black font-w500" asp-for="Firstname">Nombres</label>
                     <input asp-for="Firstname" class="form-control input-rounded">
+                    <span asp-validation-for="Firstname" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="text-black font-w500" asp-for="Lastname">Apellidos</label>
                     <input asp-for="Lastname" class="form-control input-rounded">
+                    <span asp-validation-for="Lastname" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="text-black font-w500" asp-for="Phone">Teléfono</label>
                     <input asp-for="Phone" class="form-control input-rounded">
+                    <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary" onclick="addOrEditVetAction()">@(Model.Id != "" ? "Actualizar" : "Guardar")</button>
+                    <button type="submit" class="btn btn-primary">@(Model.Id != "" ? "Actualizar" : "Guardar")</button>
                     <button type="button" class="btn btn-light" onclick="closeModal()">Cerrar</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>*@
+
+<div class="modal fade" id="vetModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="lblTitleModal" class="modal-title">Nuevo doctor</h5>
+                <button type="button" class="close" onclick="closeModal()">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="vetModalForm">
+                    <input type="hidden" id="Id" name="Id" value="">
+                    <div class="form-group">
+                        <label class="text-black font-w500" for="Firstname">Nombres</label>
+                        <input id="Firstname" name="Firstname" type="text" class="form-control input-rounded">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-black font-w500" for="Lastname">Apellidos</label>
+                        <input id="Lastname" name="Lastname" type="text" class="form-control input-rounded">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-black font-w500" for="Phone">Teléfono</label>
+                        <input id="Phone" name="Phone" type="text" class="form-control input-rounded">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" onclick="addOrEditVetAction()">Guardar</button>
+                        <button type="button" class="btn btn-light" onclick="closeModal()">Cerrar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
