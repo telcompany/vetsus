@@ -82,7 +82,7 @@
     <Build Include="dbo\Stored Procedures\spGetUserById.sql" />
     <Build Include="dbo\Stored Procedures\spSoftDeleteRecord.sql" />
     <Build Include="dbo\Stored Procedures\spSoftDeleteForeignKeyRecord.sql" />
-    <Build Include="dbo\Stored Procedures\spGetVetRecords.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllRecords.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Vetsus.DB.publish.xml" />

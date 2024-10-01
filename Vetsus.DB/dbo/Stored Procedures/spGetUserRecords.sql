@@ -11,7 +11,7 @@ BEGIN
 	SET @sql = N'
 	WITH total AS
 	(
-	  select COUNT(1) as Total from Users  
+	  select COUNT(1) as Total from Users where IsDeleted = 0
 	)
 	select TOP ('+CONVERT(VARCHAR(7),@pageSize)+') u.Id, u.Email, u.UserName, r.Name [Role], t.Total 
 	from [dbo].[Users] u
