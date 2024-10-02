@@ -2,11 +2,8 @@
 
 @model IndexViewModel
 
-@{
-    ViewData["Title"] = "Usuarios";
-}
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.css">
+<!-- Bootstrap Table -->
+<link rel="stylesheet" href="~/lib/bootstrap-table/bootstrap-table.min.css">
 
 <partial name="_BreadCrumbPartial" model="Model.BreadCrumb" />
 
@@ -38,6 +35,8 @@
                                 <th data-field="email">Email</th>
                                 <th data-field="username">Username</th>
                                 <th data-field="role">Rol</th>
+                                <th data-field="created">Fecha creación</th>
+                                <th data-field="createdBy">Creado por</th>
                                 <th data-field="id" data-formatter="actionFormatter">Acciones</th>
                             </tr>
                         </thead>
@@ -48,48 +47,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="userModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="lblTitleModal" class="modal-title">Nuevo usuario</h5>
-                <button type="button" class="close" onclick="closeModal()">
-                    <span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="userModalForm">
-                    <input type="hidden" id="hdUserId" name="hdUserId" value="">
-                    <div class="form-group">
-                        <label class="text-black font-w500" for="email">Email</label>
-                        <input id="email" name="email" type="email" class="form-control input-rounded">
-                    </div>
-                    <div class="form-group">
-                        <label class="text-black font-w500" for="username">Username</label>
-                        <input id="username" name="username" type="text" class="form-control input-rounded">
-                    </div>
-                    <div class="form-group">
-                        <label class="text-black font-w500" for="ddRole">Rol</label>
-                        <select id="ddRole" name="ddRole" class="form-control default-select">
-                            <option value="">-- Seleccione --</option>
-                            <option value="Admin">Administrador</option>
-                            <option value="User">Usuario</option>
-                            <option value="Visitor">Invitado</option>
-                        </select>
-                    </div>
-                    <div id="fgPwd" class="form-group">
-                        <label class="text-black font-w500">Contraseña</label>
-                        <input id="password" name="password" type="text" class="form-control input-rounded">
-                    </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-primary" onclick="addOrEditUserAction()">Guardar</button>
-                        <button type="button" class="btn btn-light" onclick="closeModal()">Cerrar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<partial name="_UserModalPartial" />
 
 
 @section Scripts{
@@ -97,7 +55,8 @@
     <script src="~/vendor/jquery-validation/jquery.validate.min.js"></script>
 
     <!-- Bootstrap Table -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.js"></script>
+    <script src="~/lib/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/lib/bootstrap-table/bootstrap-table-es-ES.js"></script>
 
     <script>
         const USER_ID = '@Html.Raw(ViewBag.UserId)';

@@ -2,7 +2,58 @@
 
 @model IndexViewModel
 
-@{
-}
+<!-- Bootstrap Table -->
+<link rel="stylesheet" href="~/lib/bootstrap-table/bootstrap-table.min.css">
 
 <partial name="_BreadCrumbPartial" model="Model.BreadCrumb" />
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">@Model.PageTitle</h4>
+            </div>
+            <div class="card-body">
+                <div class="d-md-flex d-block mb-3 pb-3">
+                    <div class="card-action card-tabs mb-md-0 mb-3  mr-auto">
+                    </div>
+                    <div>
+                        <a href="javascript:void(0)" onclick="addVet()" class="btn btn-primary rounded">
+                            <i class="fa fa-plus mr-2 fa-1x" aria-hidden="true"></i>Nuevo doctor
+                        </a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="tblVets"
+                           class="table table-responsive-md"
+                           data-ajax="ajaxRequest"
+                           data-side-pagination="server"
+                           data-pagination="true"
+                           data-page-list="[10, 25, 50, 100]">
+                        <thead>
+                            <tr>
+                                <th data-field="firstName">Nombres</th>
+                                <th data-field="lastName">Apellidos</th>
+                                <th data-field="phone">Teléfono</th>
+                                <th data-field="id" data-formatter="actionFormatter">Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_VetModalPartial" />
+
+@section Scripts{
+    <!-- Jquery Validation -->
+    <script src="~/vendor/jquery-validation/jquery.validate.min.js"></script>
+
+    <!-- Bootstrap Table -->
+    <script src="~/lib/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/lib/bootstrap-table/bootstrap-table-es-ES.js"></script>
+
+    <script src="~/app/js/vet.js"></script>
+}
