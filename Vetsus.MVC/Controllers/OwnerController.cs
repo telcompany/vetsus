@@ -1,14 +1,15 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Vetsus.Application.DTO;
+using Vetsus.Application.Features.Owner.Commands;
 using Vetsus.Application.Features.Owner.Queries;
-using Vetsus.Application.Features.User.Queries;
 using Vetsus.Domain.QueryParameters;
 using Vetsus.MVC.ViewModels;
 
 namespace Vetsus.MVC.Controllers
 {
-	[Authorize]
+    [Authorize]
 	public class OwnerController : Controller
     {
         private readonly ISender _sender;
@@ -48,6 +49,38 @@ namespace Vetsus.MVC.Controllers
             var response = new { rows = users?.Items, total = users?.TotalCount };
 
             return Json(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var response = await _sender.Send(new GetOwnerByIdQuery(id));
+
+            return Json(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(CreateOwnerRequest request)
+        {
+            var response = await _sender.Send(new AddOwnerCommand(request));
+
+            return Json(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(UpdateOwnerRequest request)
+        {
+            var response = await _sender.Send(new UpdateOwnerCommand(request));
+
+            return Json(response);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _sender.Send(new DeleteOwnerCommand(id));
+
+            return Json(null);
         }
     }
 }

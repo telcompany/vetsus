@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Vetsus.Application.DTO;
 using Vetsus.Application.Exceptions;
+using Vetsus.Application.Interfaces;
 using Vetsus.Application.Interfaces.Persistence;
 
 namespace Vetsus.Application.Features.User.Commands
@@ -10,7 +11,7 @@ namespace Vetsus.Application.Features.User.Commands
     public sealed class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public UpdateUserCommandHandler(IUnitOfWork unitOfWork)
+        public UpdateUserCommandHandler(IUnitOfWork unitOfWork, IUserService userService)
         {
             _unitOfWork = unitOfWork;
         }

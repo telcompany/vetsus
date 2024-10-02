@@ -2,6 +2,9 @@
 
 @model IndexViewModel
 
+<!-- Bootstrap Table -->
+<link rel="stylesheet" href="~/lib/bootstrap-table/bootstrap-table.min.css">
+
 <partial name="_BreadCrumbPartial" model="Model.BreadCrumb" />
 
 <div class="row">
@@ -26,7 +29,8 @@
                            data-ajax="ajaxRequest"
                            data-side-pagination="server"
                            data-pagination="true"
-                           data-page-list="[10, 25, 50, 100]">
+                           data-page-list="[10, 25, 50, 100]"
+                           data-locale="es-ES">
                         <thead>
                             <tr>
                                 <th data-field="firstName">Nombres</th>
@@ -50,7 +54,8 @@
     <script src="~/vendor/jquery-validation/jquery.validate.min.js"></script>
 
     <!-- Bootstrap Table -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.js"></script>
+    <script src="~/lib/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/lib/bootstrap-table/bootstrap-table-es-ES.js"></script>
 
     <script src="~/app/js/owner.js"></script>
 }

@@ -19,5 +19,11 @@ namespace Vetsus.Domain.Entities
 
         [ColumnName("PasswordHash")]
         public string PasswordHash { get; set; } = string.Empty;
+
+        [ColumnName("Created")]
+        public DateTime Created { get; set; } = DateTime.Now;
+
+        [ColumnName("CreatedBy")]
+        public string CreatedBy { get; set; } = string.Empty;
     }
 }

@@ -3,6 +3,6 @@
     public class IndexViewModel
     {
         public BreadCrumbViewModel BreadCrumb { get; set; }
-        public string PageTitle { get; set; }
+        public string PageTitle { get; set; } = string.Empty;
     }
 }

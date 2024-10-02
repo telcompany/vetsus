@@ -18,7 +18,7 @@ namespace Vetsus.MVC.Controllers
 		public UserController(ISender sender)
 		{
 			_sender = sender;
-		}
+        }
 
 		public IActionResult Index()
         {
@@ -29,7 +29,7 @@ namespace Vetsus.MVC.Controllers
             {
                 BreadCrumb = new BreadCrumbViewModel
                 {
-                    Title = "Gestión",
+                    Title = "Configuración",
                     Subtitle = "Usuarios"
                 },
                 PageTitle = "Listado de usuarios"
@@ -71,7 +71,7 @@ namespace Vetsus.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(RegisterUserRequest request)
         {
-			var response = await _sender.Send(new RegisterUserCommand(request));
+            var response = await _sender.Send(new RegisterUserCommand(request));
 
 			return Json(response);
         }

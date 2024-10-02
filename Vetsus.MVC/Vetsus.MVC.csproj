@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Vetsus.Persistence\Vetsus.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\bootstrap-table\" />
+  </ItemGroup>
+
 </Project>
