@@ -12,7 +12,7 @@ namespace Vetsus.MVC.Controllers
                 BreadCrumb = new BreadCrumbViewModel
                 {
                     Title = "Configuración",
-                    Subtitle = "Empresa"
+                    Subtitle = "Veterinaria"
                 }
             };
 

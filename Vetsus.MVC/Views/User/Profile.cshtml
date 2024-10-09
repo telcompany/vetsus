@@ -1,5 +1,116 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using Vetsus.MVC.ViewModels;
+
+@model IndexViewModel
+
+<partial name="_BreadCrumbPartial" model="Model.BreadCrumb" />
+
+@*<div class="row">
+    <div class="col-xl-8">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="profile-head">
+                <div class="profile-info">
+                    <div class="profile-photo">
+                        <img src="~/images/profile/profile.png" class="img-fluid rounded-circle" alt="">
+                    </div>
+                    <div class="profile-details">
+                        <div class="profile-name px-3 pt-2">
+                            <h4 class="text-primary mb-0">@UserSvc.User.UserName</h4>
+                            <p>@UserSvc.User.Role</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="profile-tab">
+                    <div class="custom-tab-1">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a href="#about-me" data-toggle="tab" class="nav-link active show">
+                                    <i class="la la-user mr-2"></i>
+                                    Información personal
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#profile-settings" data-toggle="tab" class="nav-link">
+                                    <i class="las la-lock mr-2"></i>
+                                    Seguridad
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="about-me" class="tab-pane fade active show">
+                                <div class="pt-4">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Email</label>
+                                                <input id="Email" name="Email" type="email" class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Username</label>
+                                                <input id="Username" name="Username" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Nombres</label>
+                                                <input id="Firstname" name="Firstname" type="text" class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Apellidos</label>
+                                                <input id="Lastname" name="Lastname" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Rol</label>
+                                                <input id="Rol" name="Rol" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">
+                                            Guardar cambios
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div id="profile-settings" class="tab-pane fade">
+                                <div class="pt-4">
+                                    <div class="settings-form">
+                                        <h4 class="text-primary pb-2">Cambiar contraseña</h4>
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label>Contraseña actual</label>
+                                                    <input id="CurrentPassword" name="CurrentPassword" type="text" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label>Nueva contraseña</label>
+                                                    <input id="NewPassword" name="NewPassword" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label>Confirmar contraseña</label>
+                                                    <input id="ConfirmPassword" name="ConfirmPassword" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">
+                                                Guardar cambios
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

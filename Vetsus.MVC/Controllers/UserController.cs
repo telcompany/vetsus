@@ -40,7 +40,17 @@ namespace Vetsus.MVC.Controllers
 
         public IActionResult Profile()
         {
-            return View();
+            var indexVM = new IndexViewModel
+            {
+                BreadCrumb = new BreadCrumbViewModel
+                {
+                    Title = "Configuración",
+                    Subtitle = "Perfil"
+                },
+                PageTitle = ""
+            };
+
+            return View(indexVM);
         }
 
         #region API_CALLS
