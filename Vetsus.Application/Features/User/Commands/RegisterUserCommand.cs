@@ -35,6 +35,8 @@ namespace Vetsus.Application.Features.User.Commands
             {
                 Email = request.Command.Email,
                 UserName = request.Command.UserName,
+                FirstName = request.Command.FirstName,
+                LastName = request.Command.LastName,
                 PasswordHash = passwordHash,
                 CreatedBy = _userService.User.UserName!
             });
