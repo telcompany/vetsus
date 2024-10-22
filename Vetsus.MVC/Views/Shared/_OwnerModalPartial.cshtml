@@ -1,4 +1,11 @@
-﻿
+﻿@using Vetsus.Application.Interfaces;
+
+@inject ISpeciesService SpeciesSvc
+
+@{
+    var speciesList = (await SpeciesSvc.GetSpecies()).Items;
+}
+
 <div class="modal fade" id="ownerModal">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -45,9 +52,13 @@
                             <label class="text-black font-w500" for="specie">Especie</label>
                             <select id="specie" name="specie" class="form-control default-select">
                                 <option value="">-- Seleccione --</option>
-                                <option value="Perro">Perro</option>
+                                @foreach (var item in speciesList)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                                @*<option value="Perro">Perro</option>
                                 <option value="Gato">Gato</option>
-                                <option value="Otros">Otros</option>
+                                <option value="Otros">Otros</option>*@
                             </select>
                         </div>
                     </div>
@@ -61,14 +72,14 @@
                             </select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="text-black font-w500" for="username">Fecha nacimiento</label>
-                            <input id="birthday" name="birthday" type="text" class="form-control input-rounded">
+                            <label class="text-black font-w500" for="birthdate">Fecha nacimiento</label>
+                            <input id="birthdate" name="birthdate" type="text" class="form-control input-rounded">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="addOrEditUserAction()">Guardar</button>
+                <button type="button" class="btn btn-primary" onclick="addOrEditOwnerAction()">Guardar</button>
                 <button type="button" class="btn btn-light" onclick="closeModal()">Cerrar</button>
             </div>
         </div>

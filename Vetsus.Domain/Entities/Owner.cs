@@ -24,5 +24,8 @@ namespace Vetsus.Domain.Entities
 
         [ColumnName("Email")]
         public string Email { get; set; } = string.Empty;
+
+        [ColumnName("Total")]
+        public int Total { get; set; } = 0;
     }
 }

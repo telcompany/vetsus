@@ -17,7 +17,7 @@ namespace Vetsus.Persistence.Repositories
         {
             var owners = (await GetAsync(queryParameters, "FirstName", "LastName", "Address", "Phone", "Email"))
                             .AsQueryable()
-                            .Select(e => new OwnerResponse(e.FirstName, e.LastName, e.Address, e.Phone, e.Email));
+                            .Select(e => new OwnerResponse(e.FirstName, e.LastName, e.Address, e.Phone, e.Email, e.Total));
 
             if (!string.IsNullOrEmpty(queryParameters.Name))
                 owners = owners.Where(e => 
@@ -28,8 +28,9 @@ namespace Vetsus.Persistence.Repositories
                 if (typeof(Owner).GetProperty(queryParameters.SortBy) != null)
                     owners = owners.OrderByCustom(queryParameters.SortBy, queryParameters.SortOrder);
 
+            int totalCount = owners != null && owners.Any() ? owners.First().Total : 0;
 
-            var pagedOwners = PageList<OwnerResponse>.Create(owners, queryParameters.PageNo, queryParameters.PageSize, 2000000);
+            var pagedOwners = PageList<OwnerResponse>.Create(owners, queryParameters.PageNo, queryParameters.PageSize, totalCount);
 
             return pagedOwners;
         }

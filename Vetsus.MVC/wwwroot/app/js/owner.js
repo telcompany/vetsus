@@ -34,3 +34,45 @@ function addOwner() {
     $('#ownerModal').modal('show');
     //clearFields();
 }
+
+function closeModal() {
+    $('#ownerModal').modal('hide');
+}
+
+function addOrEditOwnerAction() {
+    //if (!$('#userModalForm').valid()) {
+    //    return
+    //}
+
+    const request = {
+        Id: $('#hdId').val(),
+        Firstname: $('#firstname').val(),
+        Lastname: $('#lastname').val(),
+        Address: $('#address').val(),
+        Phone: $('#phone').val(),
+        Email: ''
+    }
+
+    const URL = $('#hdId').val() == '' ? '/Owner/Add' : '/Owner/Update'
+
+    $.ajax({
+        type: 'POST',
+        url: URL,
+        data: request,
+        beforeSend: function () {
+            console.log(' beforeSend')
+        },
+        success: function () {
+            closeModal();
+            $('#tblOwners').bootstrapTable('refresh');
+        },
+        error: function (response) {
+            const data = response.responseJSON;
+            alert(data.Message)
+        },
+        complete: function (response) {
+            //Hide loader
+            console.log(' complete - response >', response)
+        }
+    });
+}

@@ -20,6 +20,7 @@ namespace Vetsus.Application.Features.Pet.Commands
             var petId = await _unitOfWork.Pets.AddAsync(new Domain.Entities.Pet
             {
                 Name = request.CreatePetRequest.Name,
+                Gender = request.CreatePetRequest.Gender,
                 BirthDate = request.CreatePetRequest.BirthDate,
                 SpeciesId = request.CreatePetRequest.SpeciesId,
                 OwnerId = request.CreatePetRequest.OwnerId

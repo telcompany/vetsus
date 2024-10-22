@@ -45,7 +45,7 @@ function addOrEditUserAction() {
         return
     }
 
-    let request = {
+    const request = {
         Id: $('#hdUserId').val(),
         Username: $('#username').val(),
         Firstname: $('#firstname').val(),

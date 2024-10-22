@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Vetsus.Application.DTO;
 using Vetsus.Application.Features.Owner.Commands;
 using Vetsus.Application.Features.Owner.Queries;
+using Vetsus.Application.Features.Pet.Commands;
 using Vetsus.Domain.QueryParameters;
 using Vetsus.MVC.ViewModels;
 
@@ -60,11 +61,16 @@ namespace Vetsus.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(CreateOwnerRequest request)
+        public async Task<IActionResult> Add(CreateOwnerAndPetRequest request)
         {
-            var response = await _sender.Send(new AddOwnerCommand(request));
+            var ownerResponse = await _sender.Send(new AddOwnerCommand(request.OwnerRequest));
+            string ownerId = ownerResponse.Data;
 
-            return Json(response);
+            request.PetRequest.OwnerId = ownerId;
+
+            await _sender.Send(new AddPetCommand(request.PetRequest));
+
+            return Json(null);
         }
 
         [HttpPost]

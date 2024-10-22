@@ -15,6 +15,7 @@ namespace Vetsus.Application.Configuration
 
             services.AddHttpContextAccessor();
 			services.AddScoped<IUserService, UserService>();
+			services.AddScoped<ISpeciesService, SpeciesService>();
 		}
     }
 
