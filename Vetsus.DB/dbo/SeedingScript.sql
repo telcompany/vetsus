@@ -43,3 +43,10 @@ VALUES      ('lkmaDSX4AUW-dl8NyiBYAw','admin@vetsus.com','admin','Admin', 'Boss'
 INSERT INTO [UserRoles]
             (UserId,RoleId)
 VALUES      ('lkmaDSX4AUW-dl8NyiBYAw', '3YMZbxtOhiwTukZuZUp80a')
+
+--Species
+INSERT INTO [Species]
+            (Id,Name)
+VALUES      ('BpLZ8uxy5kSbzslonnJeww', 'Perro'),
+            ('D6kC6CNfYU6vRA7Z92LJTA', 'Gato'),
+            ('HgB8mJor4ke9WJS26O-8Jg', 'Otros')

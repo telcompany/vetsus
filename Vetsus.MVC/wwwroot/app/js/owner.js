@@ -28,3 +28,9 @@ function ajaxRequest(params) {
         params.success(res)
     })
 }
+
+function addOwner() {
+    $('#lblTitleModal').text('Nuevo registro');
+    $('#ownerModal').modal('show');
+    //clearFields();
+}

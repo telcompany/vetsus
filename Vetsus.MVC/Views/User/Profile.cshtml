@@ -1,6 +1,9 @@
-﻿@using Vetsus.MVC.ViewModels;
+﻿@using Vetsus.Application.Interfaces;
+@using Vetsus.MVC.ViewModels;
 
 @model IndexViewModel
+
+@inject IUserService UserSvc
 
 <partial name="_BreadCrumbPartial" model="Model.BreadCrumb" />
 
@@ -44,17 +47,18 @@
                             </li>
                         </ul>
                         <div class="tab-content">
+                            <input type="hidden" id="hdId" name="hdId" value="@UserSvc.User.Id">
                             <div id="about-me" class="tab-pane fade active show">
                                 <div class="pt-4">
-                                    <form>
+                                    <form id="infoForm">
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label>Email</label>
-                                                <input id="Email" name="Email" type="email" class="form-control input-rounded">
+                                                <input id="Email" name="Email" type="email" class="form-control input-rounded" readonly>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Username</label>
-                                                <input id="Username" name="Username" type="text" class="form-control input-rounded">
+                                                <input id="Username" name="Username" type="text" class="form-control input-rounded" readonly>
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -70,7 +74,7 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label>Rol</label>
-                                                <input id="Rol" name="Rol" type="text" class="form-control input-rounded">
+                                                <input id="Rol" name="Rol" type="text" class="form-control input-rounded" readonly>
                                             </div>
                                         </div>
                                         <button class="btn btn-primary" type="submit">
@@ -83,7 +87,7 @@
                                 <div class="pt-4">
                                     <div class="settings-form">
                                         <h4 class="text-primary pb-2">Cambiar contraseña</h4>
-                                        <form>
+                                        <form id="securityForm">
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label>Contraseña actual</label>
@@ -100,7 +104,7 @@
                                                     <input id="ConfirmPassword" name="ConfirmPassword" type="text" class="form-control input-rounded">
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary" type="submit">
+                                            <button class="btn btn-primary" type="button" onclick="onChangePassword()">
                                                 Guardar cambios
                                             </button>
                                         </form>
@@ -114,3 +118,10 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <!-- Jquery Validation -->
+    <script src="~/vendor/jquery-validation/jquery.validate.min.js"></script>
+
+    <script src="~/app/js/profile.js"></script>
+}

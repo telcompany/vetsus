@@ -25,7 +25,7 @@ namespace Vetsus.MVC.Controllers
             {
                 BreadCrumb = new BreadCrumbViewModel
                 {
-                    Title = "Gestión",
+                    Title = "Consultorio",
                     Subtitle = "Dueños"
                 },
                 PageTitle = "Listado de dueños"
