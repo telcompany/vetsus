@@ -15,7 +15,7 @@ namespace Vetsus.Persistence.Repositories
 
         public async Task<PageList<OwnerResponse>> GetOwnersByQueryAsync(OwnerQueryParameters queryParameters)
         {
-            var owners = (await GetAsync(queryParameters, "FirstName", "LastName", "Address", "Phone", "Email"))
+            var owners = (await GetAsync(queryParameters, "Id", "FirstName", "LastName", "Address", "Phone", "Email"))
                             .AsQueryable()
                             .Select(e => new OwnerResponse(e.FirstName, e.LastName, e.Address, e.Phone, e.Email, e.Total));
 
