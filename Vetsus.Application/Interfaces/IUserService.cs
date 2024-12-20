@@ -21,8 +21,9 @@ namespace Vetsus.Application.Interfaces
 
 			var username = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(q => q.Type == ClaimTypes.Name)?.Value;
 			var role = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(q => q.Type == ClaimTypes.Role)?.Value;
+            var userId = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Sid)?.Value;
 
-			User = new CurrentUser(username, role);
+            User = new CurrentUser(userId, username, role);
 		}
 	}
 }

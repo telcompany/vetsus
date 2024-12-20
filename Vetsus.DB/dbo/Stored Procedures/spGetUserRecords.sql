@@ -13,7 +13,7 @@ BEGIN
 	(
 	  select COUNT(1) as Total from Users where IsDeleted = 0
 	)
-	select TOP ('+CONVERT(VARCHAR(7),@pageSize)+') u.Id, u.Email, u.UserName, r.Name [Role], u.Created, u.CreatedBy, t.Total 
+	select TOP ('+CONVERT(VARCHAR(7),@pageSize)+') u.Id, u.FirstName, u.LastName, u.Email, u.UserName, r.Name [Role], u.Created, u.CreatedBy, t.Total 
 	from [dbo].[Users] u
 	inner join UserRoles ur on u.Id = ur.UserId
 	inner join Roles r on ur.RoleId = r.Id

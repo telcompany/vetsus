@@ -36,10 +36,17 @@ VALUES      ('3YMZbxtOhiwTukZuZUp80a','YOfi2bZgwgIWq8RFxFWUOe'),('3YMZbxtOhiwTuk
 
 --Users
 INSERT INTO [Users]
-            (Id,Email,UserName,PasswordHash, Created, CreatedBy)
-VALUES      ('lkmaDSX4AUW-dl8NyiBYAw','admin@vetsus.com','admin','$2a$11$AON5UqkZTQJtfNScBc8YE.05SpWrxoXrHuNI8OuSp13mKOkdEFO.G', GETDATE(), 'admin')
+            (Id,Email,UserName,FirstName, LastName, PasswordHash, Created, CreatedBy)
+VALUES      ('lkmaDSX4AUW-dl8NyiBYAw','admin@vetsus.com','admin','Admin', 'Boss', '$2a$11$AON5UqkZTQJtfNScBc8YE.05SpWrxoXrHuNI8OuSp13mKOkdEFO.G', GETDATE(), 'admin')
 
 --UserRoles
 INSERT INTO [UserRoles]
             (UserId,RoleId)
 VALUES      ('lkmaDSX4AUW-dl8NyiBYAw', '3YMZbxtOhiwTukZuZUp80a')
+
+--Species
+INSERT INTO [Species]
+            (Id,Name)
+VALUES      ('BpLZ8uxy5kSbzslonnJeww', 'Perro'),
+            ('D6kC6CNfYU6vRA7Z92LJTA', 'Gato'),
+            ('HgB8mJor4ke9WJS26O-8Jg', 'Otros')

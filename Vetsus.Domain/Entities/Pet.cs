@@ -13,6 +13,9 @@ namespace Vetsus.Domain.Entities
         [ColumnName("Name")]
         public string Name { get; set; } = string.Empty;
 
+        [ColumnName("Gender")]
+        public string Gender { get; set; } = string.Empty;
+
         [ColumnName("BirthDate")]
         public DateTime BirthDate { get; set; }
 
@@ -23,5 +26,11 @@ namespace Vetsus.Domain.Entities
         [ForeignKey]
         [ColumnName("OwnerId")]
         public string OwnerId { get; set; } = string.Empty;
+
+        [ColumnName("Created")]
+        public DateTime Created { get; set; } = DateTime.Now;
+
+        [ColumnName("CreatedBy")]
+        public string CreatedBy { get; set; } = string.Empty;
     }
 }

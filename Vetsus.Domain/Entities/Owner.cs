@@ -24,5 +24,14 @@ namespace Vetsus.Domain.Entities
 
         [ColumnName("Email")]
         public string Email { get; set; } = string.Empty;
+
+        [ColumnName("Total", false)]
+        public int Total { get; set; } = 0;
+
+        [ColumnName("Created")]
+        public DateTime Created { get; set; } = DateTime.Now;
+
+        [ColumnName("CreatedBy")]
+        public string CreatedBy { get; set; } = string.Empty;
     }
 }

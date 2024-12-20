@@ -10,7 +10,7 @@ using Vetsus.MVC.ViewModels;
 
 namespace Vetsus.MVC.Controllers
 {
-	[Authorize]
+    [Authorize]
     public class UserController : Controller
     {
 		private readonly ISender _sender;
@@ -40,7 +40,17 @@ namespace Vetsus.MVC.Controllers
 
         public IActionResult Profile()
         {
-            return View();
+            var indexVM = new IndexViewModel
+            {
+                BreadCrumb = new BreadCrumbViewModel
+                {
+                    Title = "Configuración",
+                    Subtitle = "Perfil"
+                },
+                PageTitle = ""
+            };
+
+            return View(indexVM);
         }
 
         #region API_CALLS
@@ -90,6 +100,14 @@ namespace Vetsus.MVC.Controllers
             await _sender.Send(new DeleteUserCommand(id));
 
             return Json(null);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordRequest request)
+        {
+            var response = await _sender.Send(new ChangePasswordCommand(request));
+
+            return Json(response);
         }
 
         #endregion

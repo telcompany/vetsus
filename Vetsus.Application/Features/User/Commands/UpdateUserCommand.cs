@@ -23,6 +23,8 @@ namespace Vetsus.Application.Features.User.Commands
 
             _unitOfWork.BeginTransaction();
             record.UserName = request.Command.Username;
+            record.FirstName = request.Command.FirstName;
+            record.LastName = request.Command.LastName;
 
             //TODO: Update Role
 

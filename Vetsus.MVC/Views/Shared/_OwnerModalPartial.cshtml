@@ -1,0 +1,84 @@
+﻿@using Vetsus.Application.Interfaces;
+
+@inject ISpeciesService SpeciesSvc
+
+@{
+    var speciesList = (await SpeciesSvc.GetSpecies()).Items;
+}
+
+<div class="modal fade" id="ownerModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="lblTitleModal" class="modal-title">Nuevo registro</h5>
+                <button type="button" class="close" onclick="closeModal()">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="ownerModalForm">
+                    <input type="hidden" id="hdId" name="hdId" value="">
+                    <h4 class="mb-3">Información del dueño</h4>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="text-black font-w500" for="email">Nombres</label>
+                            <input id="firstname" name="firstname" type="text" class="form-control input-rounded">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="text-black font-w500" for="username">Apellidos</label>
+                            <input id="lastname" name="lastname" type="text" class="form-control input-rounded">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="text-black font-w500" for="username">Teléfono</label>
+                            <input id="phone" name="phone" type="text" class="form-control input-rounded">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="text-black font-w500" for="username">Dirección</label>
+                            <input id="address" name="address" type="text" class="form-control input-rounded">
+                        </div>
+                    </div>
+
+                    <hr class="mb-4">
+                    <h4 class="mb-3">Información de la mascota</h4>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="text-black font-w500" for="username">Nombre</label>
+                            <input id="name" name="name" type="text" class="form-control input-rounded">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="text-black font-w500" for="specie">Especie</label>
+                            <select id="specie" name="specie" class="form-control default-select">
+                                <option value="">-- Seleccione --</option>
+                                @foreach (var item in speciesList)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="text-black font-w500" for="gender">Género</label>
+                            <select id="gender" name="gender" class="form-control default-select">
+                                <option value="">-- Seleccione --</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="text-black font-w500" for="birthdate">Fecha nacimiento</label>
+                            <input id="birthdate" name="birthdate" type="text" class="form-control input-rounded">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="addOrEditOwnerAction()">Guardar</button>
+                <button type="button" class="btn btn-light" onclick="closeModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

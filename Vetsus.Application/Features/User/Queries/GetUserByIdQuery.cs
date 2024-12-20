@@ -21,7 +21,7 @@ namespace Vetsus.Application.Features.User.Queries
 
             if (record == null) throw new NotFoundException($"Usuario con id={request.Id} no registrado");
 
-            var response = new UserByIdResponse(record.Id, record.Email, record.Username, record.Role);
+            var response = new UserByIdResponse(record.Id, record.FirstName, record.LastName, record.Email, record.Username, record.Role);
 
             return new Response<UserByIdResponse>(response);
         }

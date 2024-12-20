@@ -15,14 +15,14 @@ namespace Vetsus.Application.Utilities
         public static string GetDbTableColumnNames(this Type type, string[] selectedProperties)
         {
             if (selectedProperties.Length < 1)
-                return string.Join(",", type.GetProperties().Select(p => p.GetDbColumnName())).TrimEnd(',');
+                return string.Join(",", type.GetProperties().Where(IsForInsertOrUpdateField).Select(p => p.GetDbColumnName())).TrimEnd(',');
             else
                 return string.Join(",", type.GetProperties().Where(p => selectedProperties.ToLowerInvariant().Contains(p.Name.ToLowerInvariant())).Select(p => p.GetDbColumnName())).TrimEnd(',');
         }
 
         public static string GetColumnValuesForInsert<T>(this Type type, T obj)
         {
-            return string.Join(",", type.GetColumnProperties().Select(p => $"'{p.GetValue(obj)}'"));
+            return string.Join(",", type.GetColumnProperties().Where(IsForInsertOrUpdateField).Select(p => $"'{p.GetValue(obj)}'"));
         }
 
         public static string GetColumnValuesForUpdate<T>(this Type type, T obj)
@@ -33,6 +33,11 @@ namespace Vetsus.Application.Utilities
         public static string GetDbColumnName(this PropertyInfo propertyInfo)
         {
             return propertyInfo.GetCustomAttribute<ColumnNameAttribute>()?.NameValue ?? string.Empty;
+        }
+
+        public static bool IsForInsertOrUpdateField(this PropertyInfo propertyInfo)
+        {
+            return propertyInfo.GetCustomAttribute<ColumnNameAttribute>()?.IsForInsertOrUpdate ?? false;
         }
 
         public static IEnumerable<string> ToLowerInvariant(this string[] source)

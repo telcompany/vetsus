@@ -13,6 +13,12 @@ namespace Vetsus.Domain.Entities
         [ColumnName("UserName")]
         public string UserName { get; set; } = string.Empty;
 
+        [ColumnName("FirstName")]
+        public string FirstName { get; set; } = string.Empty;
+
+        [ColumnName("LastName")]
+        public string LastName { get; set; } = string.Empty;
+
         [DistinguishingUniqueKey]
         [ColumnName("Email")]
         public string Email { get; set; } = string.Empty;

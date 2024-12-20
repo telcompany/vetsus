@@ -45,9 +45,11 @@ function addOrEditUserAction() {
         return
     }
 
-    let request = {
+    const request = {
         Id: $('#hdUserId').val(),
         Username: $('#username').val(),
+        Firstname: $('#firstname').val(),
+        Lastname: $('#lastname').val(),
         Email: $('#email').val(),
         Password: $('#password').val(),
         Role: $('#ddRole option:selected').val()
@@ -97,6 +99,8 @@ function editUser(id) {
         success: function (response) {
             const data = response.data;
             $('#hdUserId').val(data.id)
+            $('#firstname').val(data.firstName)
+            $('#lastname').val(data.lastName)
             $('#username').val(data.username)
             $('#email').val(data.email)
             $('#ddRole').val(data.role).change()
@@ -140,6 +144,8 @@ function deleteUser(id) {
 
 function clearFields() {
     $('#hdUserId').val('')
+    $('#firstname').val('')
+    $('#lastname').val('')
     $('#username').val('')
     $('#email').val('')
     $('#password').val('')
@@ -152,6 +158,8 @@ function validateForm() {
         rules: {
             email: { required: true, email: true },
             username: { required: true },
+            firstname: { required: true },
+            lastname: { required: true },
             ddRole: { required: true },
             password: {
                 required: function () {
@@ -165,6 +173,8 @@ function validateForm() {
                 email: "Formato de email incorrecto"
             },
             username: "Campo requerido",
+            firstname: "Campo requerido",
+            lastname: "Campo requerido",
             ddRole: "Campo requerido",
             password: "Campo requerido",
         },
