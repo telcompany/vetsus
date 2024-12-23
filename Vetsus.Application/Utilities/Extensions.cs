@@ -22,12 +22,33 @@ namespace Vetsus.Application.Utilities
 
         public static string GetColumnValuesForInsert<T>(this Type type, T obj)
         {
-            return string.Join(",", type.GetColumnProperties().Where(IsForInsertOrUpdateField).Select(p => $"'{p.GetValue(obj)}'"));
+            return string.Join(",", type.GetColumnProperties().Where(IsForInsertOrUpdateField).Select(p => GetColumnValue(p, obj)));
+        }
+
+        private static string GetColumnValue<T>(PropertyInfo p, T obj)
+        {
+            if (p.PropertyType == typeof(DateTime) || p.PropertyType == typeof(DateTime?))
+            {
+                if (p.PropertyType == typeof(DateTime))
+                {
+                    return $"'{(DateTime)p.GetValue(obj)!:MM/dd/yyyy}'";
+                }
+                else
+                {
+                    var value = (DateTime?)p.GetValue(obj);
+
+                    return value != null ? $"'{value:MM/dd/yyyy}'" : "null";
+                }
+            }
+            else
+            {
+                return $"'{p.GetValue(obj)}'";
+            }
         }
 
         public static string GetColumnValuesForUpdate<T>(this Type type, T obj)
         {
-            return string.Join(",", type.GetNonPrimaryKeyColumnProperties().Select(p => $"{p.GetDbColumnName()}='{p.GetValue(obj)}'"));
+            return string.Join(",", type.GetNonPrimaryKeyColumnProperties().Select(p => $"{p.GetDbColumnName()}='{GetColumnValue(p, obj)}'"));
         }
 
         public static string GetDbColumnName(this PropertyInfo propertyInfo)
