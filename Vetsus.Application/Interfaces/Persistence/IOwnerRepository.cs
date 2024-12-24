@@ -7,6 +7,6 @@ namespace Vetsus.Application.Interfaces.Persistence
 {
     public interface IOwnerRepository: IGenericRepository<Owner>
     {
-        public Task<PageList<OwnerResponse>> GetOwnersByQueryAsync(OwnerQueryParameters queryParameters);
+        public Task<PageList<GetOwnerResponse>> GetOwnersByQueryAsync(OwnerQueryParameters queryParameters);
     }
 }

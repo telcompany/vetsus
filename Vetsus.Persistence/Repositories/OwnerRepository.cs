@@ -13,11 +13,11 @@ namespace Vetsus.Persistence.Repositories
         {
         }
 
-        public async Task<PageList<OwnerResponse>> GetOwnersByQueryAsync(OwnerQueryParameters queryParameters)
+        public async Task<PageList<GetOwnerResponse>> GetOwnersByQueryAsync(OwnerQueryParameters queryParameters)
         {
-            var owners = (await GetAsync(queryParameters, "Id", "FirstName", "LastName", "Address", "Phone", "Email"))
+            var owners = (await GetAsync(queryParameters, "Id", "FirstName", "LastName", "Address", "Phone", "Email", "Created", "CreatedBy"))
                             .AsQueryable()
-                            .Select(e => new OwnerResponse(e.FirstName, e.LastName, e.Address, e.Phone, e.Email, e.Total));
+                            .Select(e => new GetOwnerResponse(e.FirstName, e.LastName, e.Address, e.Phone, e.Email, e.Created, e.CreatedBy, e.Total));
 
             if (!string.IsNullOrEmpty(queryParameters.Name))
                 owners = owners.Where(e => 
@@ -30,7 +30,7 @@ namespace Vetsus.Persistence.Repositories
 
             int totalCount = owners != null && owners.Any() ? owners.First().Total : 0;
 
-            var pagedOwners = PageList<OwnerResponse>.Create(owners, queryParameters.PageNo, queryParameters.PageSize, totalCount);
+            var pagedOwners = PageList<GetOwnerResponse>.Create(owners, queryParameters.PageNo, queryParameters.PageSize, totalCount);
 
             return pagedOwners;
         }

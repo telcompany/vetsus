@@ -17,7 +17,7 @@ namespace Vetsus.Domain.Entities
         public string Gender { get; set; } = string.Empty;
 
         [ColumnName("BirthDate")]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         [ForeignKey]
         [ColumnName("SpeciesId")]
