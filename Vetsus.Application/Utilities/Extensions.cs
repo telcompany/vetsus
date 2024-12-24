@@ -48,7 +48,7 @@ namespace Vetsus.Application.Utilities
 
         public static string GetColumnValuesForUpdate<T>(this Type type, T obj)
         {
-            return string.Join(",", type.GetNonPrimaryKeyColumnProperties().Select(p => $"{p.GetDbColumnName()}='{GetColumnValue(p, obj)}'"));
+            return string.Join(",", type.GetNonPrimaryKeyColumnProperties().Select(p => $"{p.GetDbColumnName()}={GetColumnValue(p, obj)}"));
         }
 
         public static string GetDbColumnName(this PropertyInfo propertyInfo)
@@ -56,7 +56,7 @@ namespace Vetsus.Application.Utilities
             return propertyInfo.GetCustomAttribute<ColumnNameAttribute>()?.NameValue ?? string.Empty;
         }
 
-        public static bool IsForInsertOrUpdateField(this PropertyInfo propertyInfo)
+        private static bool IsForInsertOrUpdateField(this PropertyInfo propertyInfo)
         {
             return propertyInfo.GetCustomAttribute<ColumnNameAttribute>()?.IsForInsertOrUpdate ?? false;
         }

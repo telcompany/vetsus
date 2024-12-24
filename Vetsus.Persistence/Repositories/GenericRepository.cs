@@ -95,6 +95,7 @@ namespace Vetsus.Persistence.Repositories
             parameters.Add("tableName", typeof(T).GetDbTableName(), DbType.String, ParameterDirection.Input, size: 50);
             parameters.Add("columnsToUpdate", typeof(T).GetColumnValuesForUpdate(entity), DbType.String, ParameterDirection.Input);
             parameters.Add("id", entity.Id, DbType.String, ParameterDirection.Input, size: 22);
+
             await _dapperDataContext.Connection.ExecuteAsync("spUpdateRecord", parameters, _dapperDataContext.Transaction, commandType: CommandType.StoredProcedure);
         }
 
