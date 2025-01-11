@@ -121,3 +121,34 @@ function validateForm() {
         },
     });
 }
+
+function detailFormatter(index, row, $detail) {
+    $detail.html('Cargando...');
+
+    const url = `/Owner/GetPetsByOwnerId?ownerId=${row.id}`
+    $.get(url).then(function (res) {
+        const data = res.data
+        let records = []
+        records = data.map(value => `
+                <tr>
+                    <td>${value.name}</td>
+                    <td>${value.gender}</td>
+                    <td>${value.speciesId}</td>
+                    <td>${value.birthDate}</td>
+                </tr>
+             `).join('')
+
+        const template = records.length > 0 ? 
+            `<table style="width:100%">
+                <tr>
+                    <th>Mascota</th>
+                    <th>Género</th>
+                    <th>Especie</th>
+                    <th>Fecha nacimiento</th>
+                </tr>
+                ${records}
+            </table>` : '<p>No se encontraron registros para mostrar</p>'
+
+        $detail.html(template);
+    })
+}

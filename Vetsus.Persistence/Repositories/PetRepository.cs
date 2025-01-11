@@ -9,5 +9,10 @@ namespace Vetsus.Persistence.Repositories
         public PetRepository(DapperDataContext dapperDataContext) : base(dapperDataContext)
         {
         }
+
+        public async Task<IEnumerable<Pet>> GetPetsByOwnerId(string ownerId)
+        {
+            return await GetBySpecificColumnAsync("OwnerId", ownerId);
+        }
     }
 }

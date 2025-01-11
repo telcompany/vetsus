@@ -5,6 +5,7 @@ using Vetsus.Application.DTO;
 using Vetsus.Application.Features.Owner.Commands;
 using Vetsus.Application.Features.Owner.Queries;
 using Vetsus.Application.Features.Pet.Commands;
+using Vetsus.Application.Features.Pet.Queries;
 using Vetsus.Domain.QueryParameters;
 using Vetsus.MVC.ViewModels;
 
@@ -87,6 +88,15 @@ namespace Vetsus.MVC.Controllers
             await _sender.Send(new DeleteOwnerCommand(id));
 
             return Json(null);
+        }
+
+        //Pets
+        [HttpGet]
+        public async Task<IActionResult> GetPetsByOwnerId(string ownerId)
+        {
+            var response = await _sender.Send(new GetPetsByOwnerIdQuery(ownerId));
+
+            return Json(response);
         }
     }
 }
