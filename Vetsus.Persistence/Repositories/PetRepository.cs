@@ -1,6 +1,10 @@
-﻿using Vetsus.Application.Interfaces.Persistence;
+﻿using Dapper;
+using System.Data;
+using Vetsus.Application.DTO;
+using Vetsus.Application.Interfaces.Persistence;
 using Vetsus.Domain.Entities;
 using Vetsus.Persistence.Contexts;
+using static Vetsus.Domain.Errors.Errors;
 
 namespace Vetsus.Persistence.Repositories
 {
@@ -10,9 +14,14 @@ namespace Vetsus.Persistence.Repositories
         {
         }
 
-        public async Task<IEnumerable<Pet>> GetPetsByOwnerId(string ownerId)
+        public async Task<IEnumerable<GetPetsByOwnerIdResponse>> GetPetsByOwnerId(string ownerId)
         {
-            return await GetBySpecificColumnAsync("OwnerId", ownerId);
+            var parameters = new DynamicParameters();
+            parameters.Add("ownerId", ownerId, DbType.String, ParameterDirection.Input, size: 22);
+
+            using var connection = _dapperDataContext.Connection;
+
+            return await connection.QueryAsync<GetPetsByOwnerIdResponse>("spGetPetsByOwnerId", parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

@@ -21,7 +21,7 @@ function actionFormatter(id, row, index) {
         return '-';
     }
 
-    var userId = "'" + id + "'";
+    const userId = "'" + id + "'";
     return [
         '<a href="javascript:void(0)" title="Editar usuario" onclick="editUser(' + userId + ')"',
         '<i class="fa fa-pencil fa-2x"></i>',

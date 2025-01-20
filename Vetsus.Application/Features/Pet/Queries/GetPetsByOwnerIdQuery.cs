@@ -17,14 +17,9 @@ namespace Vetsus.Application.Features.Pet.Queries
 
         public async Task<Response<IEnumerable<GetPetsByOwnerIdResponse>>> Handle(GetPetsByOwnerIdQuery request, CancellationToken cancellationToken)
         {
-            var pets = await _unitOfWork.Pets.GetBySpecificColumnAsync("OwnerId", request.OwnerId);
+            var pets = await _unitOfWork.Pets.GetPetsByOwnerId(request.OwnerId);
 
-            var petsMapped = pets.Select(x => new GetPetsByOwnerIdResponse(x.Name,
-                x.BirthDate,
-                x.SpeciesId,
-                x.Gender));
-
-            return new Response<IEnumerable<GetPetsByOwnerIdResponse>>(petsMapped);
+            return new Response<IEnumerable<GetPetsByOwnerIdResponse>>(pets);
         }
     }
 }

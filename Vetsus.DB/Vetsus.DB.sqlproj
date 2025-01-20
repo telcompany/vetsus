@@ -84,6 +84,7 @@
     <Build Include="dbo\Stored Procedures\spSoftDeleteForeignKeyRecord.sql" />
     <Build Include="dbo\Stored Procedures\spGetAllRecords.sql" />
     <Build Include="dbo\Stored Procedures\spGetOwnerRecords.sql" />
+    <Build Include="dbo\Stored Procedures\spGetPetsByOwnerId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Vetsus.DB.publish.xml" />

@@ -5,6 +5,6 @@ namespace Vetsus.Application.Interfaces.Persistence
 {
     public interface IPetRepository: IGenericRepository<Pet>
     {
-        public Task<IEnumerable<Pet>> GetPetsByOwnerId(string ownerId);
+        public Task<IEnumerable<GetPetsByOwnerIdResponse>> GetPetsByOwnerId(string ownerId);
     }
 }

@@ -1,0 +1,62 @@
+﻿@using Vetsus.Application.Interfaces;
+
+@inject ISpeciesService SpeciesSvc
+
+@{
+    var speciesList = (await SpeciesSvc.GetSpecies()).Items;
+}
+
+<div class="modal fade" id="petModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="lblTitleModal" class="modal-title">Nueva mascota</h5>
+                <button type="button" class="close" onclick="closePetModal()">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="petModalForm">
+                    <input type="hidden" id="hdId" name="hdId" value="">
+
+                    <h4 class="mb-3">Dueño: XXXYYYZZZ</h4>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="text-black font-w500" for="username">Nombre</label>
+                            <input id="petName" name="petName" type="text" class="form-control input-rounded">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="text-black font-w500" for="specie">Especie</label>
+                            <select id="petSpecie" name="petSpecie" class="form-control default-select">
+                                <option value="">-- Seleccione --</option>
+                                @foreach (var item in speciesList)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="text-black font-w500" for="gender">Género</label>
+                            <select id="petGender" name="petGender" class="form-control default-select">
+                                <option value="">-- Seleccione --</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="text-black font-w500" for="birthdate">Fecha nacimiento</label>
+                            <input id="petBirthdate" name="petBirthdate" type="text" class="form-control input-rounded">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="addPetAction()">Guardar</button>
+                <button type="button" class="btn btn-light" onclick="closePetModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

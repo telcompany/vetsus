@@ -1,7 +1,14 @@
 $(document).ready(function () {
     validateForm();
+    validatePetForm();
     initBootstrapTable();
 });
+
+const URL_GETALL = '/Owner/GetAll';
+const URL_DELETE = '/Owner/Delete';
+const URL_ADD = '/Owner/Add';
+const URL_UPDATE = '/Owner/Update';
+const URL_ADD_PET = '/Pet/Add';
 
 function initBootstrapTable() {
     $('#tblOwners').bootstrapTable();
@@ -10,21 +17,23 @@ function initBootstrapTable() {
 function actionFormatter(id, row, index) {
     const userId = "'" + id + "'";
     return [
+        '<a href="javascript:void(0)" title="Nueva mascota" onclick="addPet('+ userId +')"',
+        '<i class="fa fa-plus-circle fa-lg"></i>',
+        '</a>  ',
+        '&nbsp;&nbsp;',
         '<a href="javascript:void(0)" title="Editar dueño" onclick="editOwner(' + userId + ')"',
-        '<i class="fa fa-pencil fa-2x"></i>',
+        '<i class="fa fa-pencil fa-lg"></i>',
         '</a>  ',
         '&nbsp;&nbsp;',
         '<a href="javascript:void(0)" title="Eliminar dueño" onclick="deleteOwner(' + userId + ')">',
-        '<i class="fa fa-trash fa-2x"></i>',
+        '<i class="fa fa-trash fa-lg"></i>',
         '</a>'
     ].join('')
 }
 
 function ajaxRequest(params) {
-    const url = '/Owner/GetAll'
-
     console.log('params.data >', params.data)
-    $.get(url + '?' + $.param(params.data)).then(function (res) {
+    $.get(URL_GETALL + '?' + $.param(params.data)).then(function (res) {
         params.success(res)
     })
 }
@@ -37,6 +46,10 @@ function addOwner() {
 
 function closeModal() {
     $('#ownerModal').modal('hide');
+}
+
+function closePetModal() {
+    $('#petModal').modal('hide');
 }
 
 function addOrEditOwnerAction() {
@@ -65,7 +78,7 @@ function addOrEditOwnerAction() {
         PetRequest: petRequest
     }
 
-    const URL = $('#hdId').val() == '' ? '/Owner/Add' : '/Owner/Update'
+    const URL = $('#hdId').val() == '' ? URL_ADD : URL_UPDATE
 
     $.ajax({
         type: 'POST',
@@ -133,8 +146,13 @@ function detailFormatter(index, row, $detail) {
                 <tr>
                     <td>${value.name}</td>
                     <td>${value.gender}</td>
-                    <td>${value.speciesId}</td>
+                    <td>${value.species}</td>
                     <td>${value.birthDate}</td>
+                    <td>
+                        <a href="javascript:void(0)" title="Ver historia clínica" onclick="getPetDetail('${value.petId}')"
+                            <i class="fa fa-eye fa-lg"></i>
+                        </a>
+                    </td>
                 </tr>
              `).join('')
 
@@ -145,10 +163,116 @@ function detailFormatter(index, row, $detail) {
                     <th>Género</th>
                     <th>Especie</th>
                     <th>Fecha nacimiento</th>
+                    <th>Acciones</th>
                 </tr>
                 ${records}
             </table>` : '<p>No se encontraron registros para mostrar</p>'
 
         $detail.html(template);
     })
+}
+
+function deleteOwner(id) {
+    let result = confirm('¿Estás seguro(a) de eliminar este dueño?')
+    if (result) {
+        $.ajax({
+            type: 'DELETE',
+            url: URL_DELETE,
+            data: { id },
+            beforeSend: function () {
+                console.log(' beforeSend')
+            },
+            success: function () {
+                alert('Dueño eliminado correctamente')
+                $('#tblOwners').bootstrapTable('refresh')
+            },
+            error: function (response) {
+                const data = response.responseJSON;
+                alert(data.Message)
+            },
+            complete: function (response) {
+                //Hide loader
+                console.log(' complete - response >', response)
+            }
+        });
+    }
+}
+
+function getPetDetail(petId) {
+    alert(petId)
+}
+
+function addPet() {
+    clearPetForm()
+    $('#petModal').modal('show');
+}
+
+function validatePetForm() {
+    $("#petModalForm").validate({
+        rules: {
+            petName: { required: true },
+            petGender: { required: true },
+            petSpecie: { required: true },
+        },
+        messages: {
+            petName: "Campo requerido",
+            petGender: "Campo requerido",
+            petSpecie: "Campo requerido"
+        },
+        errorClass: "invalid-feedback animated fadeInUp",
+        errorElement: "div",
+        errorPlacement: function (error, element) {
+            if ($(element).attr('id') == 'petGender' || $(element).attr('id') == 'petSpecie') {
+                $(element).parent().parent().append(error)
+            } else {
+                $(element).parent().append(error)
+            }
+        },
+        highlight: function (element) {
+            $(element).closest(".form-group").removeClass("is-invalid").addClass("is-invalid")
+        },
+    });
+}
+
+function addPetAction() {
+    if (!$('#petModalForm').valid()) {
+        return
+    }
+
+    const payload = {
+        OwnerId: '',
+        Name: $('#petName').val(),
+        Gender: $('#petGender option:selected').val(),
+        BirthDate: null,
+        SpeciesId: $('#petSpecie option:selected').val()
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: URL_ADD_PET,
+        data: payload,
+        beforeSend: function () {
+            console.log(' beforeSend')
+        },
+        success: function () {
+            closeModal();
+            $('#tblOwners').bootstrapTable('refresh');
+        },
+        error: function (response) {
+            const data = response.responseJSON;
+            alert(data.Message)
+        },
+        complete: function (response) {
+            //Hide loader
+            console.log(' complete - response >', response)
+        }
+    });
+}
+
+function clearPetForm() {
+    $('#petName').val('')
+    $('#petSpecie').val('').change()
+    $('#petGender').val('').change()
+    $('#petBirthdate').val('')
+    $('#petModalForm').validate().resetForm()
 }

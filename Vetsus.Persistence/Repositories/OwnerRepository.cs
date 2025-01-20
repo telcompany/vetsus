@@ -1,4 +1,6 @@
-﻿using Vetsus.Application.DTO;
+﻿using Dapper;
+using System.Data;
+using Vetsus.Application.DTO;
 using Vetsus.Application.Interfaces.Persistence;
 using Vetsus.Application.Utilities;
 using Vetsus.Domain.Entities;
@@ -15,18 +17,16 @@ namespace Vetsus.Persistence.Repositories
 
         public async Task<PageList<GetOwnerResponse>> GetOwnersByQueryAsync(OwnerQueryParameters queryParameters)
         {
-            var owners = (await GetAsync(queryParameters, "Id", "FirstName", "LastName", "Address", "Phone", "Email", "Created", "CreatedBy", "Total"))
-                            .AsQueryable()
-                            .Select(e => new GetOwnerResponse(e.Id, e.FirstName, e.LastName, e.Address, e.Phone, e.Email, e.Created, e.CreatedBy, e.Total));
+            var parameters = new DynamicParameters();
+            parameters.Add("pageNumber", queryParameters.PageNo, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("pageSize", queryParameters.PageSize, DbType.Int32, ParameterDirection.Input);
+
+            using var connection = _dapperDataContext.Connection;
+
+            var owners = await connection.QueryAsync<GetOwnerResponse>("spGetOwnerRecords", parameters, commandType: CommandType.StoredProcedure);
 
             if (!string.IsNullOrEmpty(queryParameters.Name))
-                owners = owners.Where(e => 
-                    e.FirstName.ToLowerInvariant().Contains(queryParameters.Name.ToLowerInvariant())
-                    );
-
-            if (!string.IsNullOrEmpty(queryParameters.SortBy))
-                if (typeof(Owner).GetProperty(queryParameters.SortBy) != null)
-                    owners = owners.OrderByCustom(queryParameters.SortBy, queryParameters.SortOrder);
+                owners = owners.Where(e => e.FirstName.ToLowerInvariant().Contains(queryParameters.Name.ToLowerInvariant()));
 
             int totalCount = owners != null && owners.Any() ? owners.First().Total : 0;
 
