@@ -5,6 +5,10 @@
 <!-- Bootstrap Table -->
 <link rel="stylesheet" href="~/lib/bootstrap-table/bootstrap-table.min.css">
 
+<!-- Jquery UI -->
+@*<link rel="stylesheet" href="~/vendor/jqueryui/css/jquery-ui.min.css">*@
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+
 <partial name="_BreadCrumbPartial" model="Model.BreadCrumb" />
 
 <div class="row">
@@ -55,8 +59,13 @@
 <partial name="_PetModalPartial" />
 
 @section Scripts{
+
     <!-- Jquery Validation -->
     <script src="~/vendor/jquery-validation/jquery.validate.min.js"></script>
+
+    <!-- Jquery UI -->
+    <script src="~/vendor/jqueryui/js/jquery-ui.min.js"></script>
+    @*<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>*@
 
     <!-- Bootstrap Table -->
     <script src="~/lib/bootstrap-table/bootstrap-table.min.js"></script>

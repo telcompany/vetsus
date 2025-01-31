@@ -16,7 +16,8 @@ BEGIN
 		select top(@pageSize)
 		o.Id, 
 		o.FirstName, 
-		o.LastName, 
+		o.LastName,
+		o.Phone,
 		o.Created, 
 		o.CreatedBy 
 		from Owners o
@@ -29,7 +30,7 @@ BEGIN
 		select o.*, COUNT(p.Id) as TotalPets
 		from pagedRecords o
 		left join Pets p on o.Id = p.OwnerId
-		group by o.Id, o.FirstName, o.LastName, o.Created, o.CreatedBy
+		group by o.Id, o.FirstName, o.LastName, o.Phone, o.Created, o.CreatedBy
 	)
 
 	select q.*, total from query q 

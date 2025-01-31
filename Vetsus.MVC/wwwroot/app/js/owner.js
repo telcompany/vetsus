@@ -12,12 +12,20 @@ const URL_ADD_PET = '/Pet/Add';
 
 function initBootstrapTable() {
     $('#tblOwners').bootstrapTable();
+    $("#petBirthdate").datepicker({
+        dateFormat: 'dd/mm/yy', 
+    });
+    $("#birthdate").datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
 }
 
 function actionFormatter(id, row, index) {
+    console.log('row >', row)
     const userId = "'" + id + "'";
+    const fullname = `'${row.firstName} ${row.lastName}'`
     return [
-        '<a href="javascript:void(0)" title="Nueva mascota" onclick="addPet('+ userId +')"',
+        '<a href="javascript:void(0)" title="Nueva mascota" onclick="addPet(' + userId + ',' + fullname +')"',
         '<i class="fa fa-plus-circle fa-lg"></i>',
         '</a>  ',
         '&nbsp;&nbsp;',
@@ -202,9 +210,11 @@ function getPetDetail(petId) {
     alert(petId)
 }
 
-function addPet() {
+function addPet(id, fullname) {
     clearPetForm()
     $('#petModal').modal('show');
+    $('#lblOwner').text(`Dueño: ${fullname}`);
+    $('#hdOwnerId').val(id);
 }
 
 function validatePetForm() {
@@ -240,12 +250,14 @@ function addPetAction() {
     }
 
     const payload = {
-        OwnerId: '',
+        OwnerId: $('#hdOwnerId').val(),
         Name: $('#petName').val(),
         Gender: $('#petGender option:selected').val(),
         BirthDate: null,
         SpeciesId: $('#petSpecie option:selected').val()
     }
+
+    console.log('payload >', payload)
 
     $.ajax({
         type: 'POST',
@@ -255,7 +267,7 @@ function addPetAction() {
             console.log(' beforeSend')
         },
         success: function () {
-            closeModal();
+            closePetModal();
             $('#tblOwners').bootstrapTable('refresh');
         },
         error: function (response) {
@@ -270,6 +282,7 @@ function addPetAction() {
 }
 
 function clearPetForm() {
+    $('#hdOwnerId').val('')
     $('#petName').val('')
     $('#petSpecie').val('').change()
     $('#petGender').val('').change()
